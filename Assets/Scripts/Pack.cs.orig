@@ -9,8 +9,12 @@ public class Pack : MonoBehaviour
     public float maxHealth = 10f;
     public float speed = 1f;
     public GameObject bulletPrefab;
-    public float shootSpeedMultiplier = 1f;
+<<<<<<< HEAD
+    public float shootSpeed = 20f;
     public SimpleHealthBar healthBar;
+=======
+    public float shootSpeedMultiplier = 1f;
+>>>>>>> d44b7eb5a046f231518f69fb4b9f7a543790ef19
 
     protected UpgradeList upgrades;
 
