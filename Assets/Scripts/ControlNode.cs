@@ -17,7 +17,7 @@ public class ControlNode
         status = State.Empty;
     }
 
-    // Setters and Getters
+    // Setters and getters for team
     public Team getTeam()
     {
         return owner;
@@ -28,6 +28,8 @@ public class ControlNode
         owner = team;
 
     }
+
+    // Setters and getters for state
     public State getState()
     {
         return status;
