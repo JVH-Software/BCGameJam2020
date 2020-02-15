@@ -6,19 +6,23 @@ public class ControlNodeObject : MonoBehaviour
 {
 
     Collider2D region;
-    private float capturePercentage;
+    private double capturePercentage;
     private int numTeamsOnNode;
-    private ControlNode node;
 
+    private ControlNode node;
+    private const double CAPTURE_RATE = 1/3f;
+    private string occupyingTeam;
     private void Awake()
     {
         region = GetComponentInParent<Collider2D>();
         capturePercentage = 0f;
         node = new ControlNode();
         numTeamsOnNode = 0;
+        occupyingTeam = "NoTeam";
+        StartCoroutine("capture");
     }
 
-    // Collision detection when entering region
+    // For trigger implementation, the incoming gameobject must have a 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         numTeamsOnNode++;
@@ -26,40 +30,70 @@ public class ControlNodeObject : MonoBehaviour
         {
             node.setState(ControlNode.State.Contested);
         }
+        else
+        {
+            occupyingTeam = collider.gameObject.tag;
+        }
     }
 
-    // Collision detection when staying/capturing region
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (numTeamsOnNode == 1)
+        if (numTeamsOnNode == 1 && node.getState() != ControlNode.State.Contested)
         {
             node.setState(ControlNode.State.Capturing);
         }
     }
-
-    // Collision detection when leaving region
     private void OnTriggerExit2D(Collider2D collider)
     {
         numTeamsOnNode--;
         if(numTeamsOnNode == 0)
         {
+            occupyingTeam = "NoTeam";
             node.setState(ControlNode.State.Empty);
         }
-        else if(numTeamsOnNode == 1){
+        else if(numTeamsOnNode == 1 && node.getState() != ControlNode.State.Contested)
+        {
             node.setState(ControlNode.State.Capturing);
         }
-    }
-
-    // Run every frame
-    private void Update()
-    {
-        //printing the node state
-        Debug.Log(node.getState());
-        Debug.Log(numTeamsOnNode);
     }
 
     public ControlNode getControlNode()
     {
         return node;
+    }
+    public void Update()
+    {
+        Debug.Log(occupyingTeam);
+    }
+    IEnumerator capture()
+    { 
+        while (true)
+        {
+            ControlNode.State nodeStatus = node.getState();
+            if(capturePercentage >= 1 && nodeStatus != ControlNode.State.Contested)
+            {
+                Debug.Log("Captured");
+                node.setState(ControlNode.State.Captured);
+            }
+            else if (nodeStatus == ControlNode.State.Capturing && capturePercentage < 1)
+            {
+                Debug.Log("Capturing State");
+                capturePercentage += CAPTURE_RATE * Time.deltaTime;
+                Debug.Log(capturePercentage);
+            }
+            else if(nodeStatus == ControlNode.State.Contested)
+            {
+                Debug.Log("Contested!");
+            }
+            else if(nodeStatus == ControlNode.State.Empty)
+            {
+                Debug.Log("Lost State");
+                capturePercentage = 0;
+            }
+
+            yield return null;
+
+        }
+        
     }
 }

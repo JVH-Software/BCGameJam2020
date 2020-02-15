@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Pack
+  - UpperBarriers
   - Wolf
+  - Bear
   layers:
   - Default
   - TransparentFX
@@ -14,10 +17,10 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - LowerBarriers
+  - UpperBarriers
+  - Packs
+  - Bullets
   - 
   - 
   - 
@@ -41,4 +44,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2750500255
+    locked: 0
+  - name: Ground
+    uniqueID: 3049868441
+    locked: 0
+  - name: Entities
+    uniqueID: 3041080875
+    locked: 0
+  - name: Foreground
+    uniqueID: 2605908635
+    locked: 0
+  - name: Territory
+    uniqueID: 2742566767
     locked: 0
