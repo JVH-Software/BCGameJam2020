@@ -19,5 +19,11 @@ public class PlayerPack : PackMember
         {
             pack.Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
+
+        if (health <= 0)
+        {
+            pack.Respawn();
+        }
     }
+
 }

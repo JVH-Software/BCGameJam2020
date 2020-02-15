@@ -331,6 +331,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 343718817}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &505042887 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11487436, guid: 60da1df1f7edb3747bea8f735b2768d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 343718817}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1310e65397a274d44a776b51d6937f61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1229,9 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1
   projectileSpeedMultiplier: 1
-  healthBar: {fileID: 0}
-  respawnPoint: {fileID: 0}
-  respawnTime: 500
+  respawnPoint: {fileID: 1658413483}
   packMembers:
   - {fileID: 90485600447257314}
   - {fileID: 565875752}
@@ -11086,9 +11096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMultiplier: 1
   projectileSpeedMultiplier: 1
-  healthBar: {fileID: 0}
-  respawnPoint: {fileID: 0}
-  respawnTime: 500
+  respawnPoint: {fileID: 1658413483}
   packMembers:
   - {fileID: 1308992448}
   - {fileID: 1040745607}
@@ -11612,6 +11620,11 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1746176230}
+    - target: {fileID: 7789012805246185145, guid: 8561fcc289ae67f43bf6cfe931ab5dae,
+        type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 505042887}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8561fcc289ae67f43bf6cfe931ab5dae, type: 3}
 --- !u!4 &5783551859162893048 stripped

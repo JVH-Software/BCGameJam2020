@@ -11,11 +11,12 @@ public class PackMember : MonoBehaviour
     public float speed = 1f;
     public Pack pack;
     public GameObject attackTarget;
+    public SimpleHealthBar healthBar;
 
     public UnityEngine.Tilemaps.Tilemap tilemap;
 
 
-    private bool dead = false;
+    public bool dead = false;
     private Gun gun;
 
     protected UpgradeList upgrades;
@@ -26,7 +27,7 @@ public class PackMember : MonoBehaviour
     GameObject packs;
     public Vector2 _staticTarget;
 
-    private List<Vector2> points = new List<Vector2>() { new Vector2(-3f, 5f) };
+    protected List<Vector2> points = new List<Vector2>() { new Vector2(-3f, 5f) };
 
 
 
@@ -61,7 +62,7 @@ public class PackMember : MonoBehaviour
                 }
             }
 
-            if (Vector3.Distance(transform.position, attackTarget.transform.position) < 5)
+            if (attackTarget != null && Vector3.Distance(transform.position, attackTarget.transform.position) < 5)
             {
                 Shoot(attackTarget.transform.position, pack);
             }
@@ -122,7 +123,7 @@ public class PackMember : MonoBehaviour
         rbody.velocity = (rbody.velocity + knockback);
     }
 
-    private void ModifyHealth(float amount)
+    protected void ModifyHealth(float amount)
     {
         health += amount;
         if (health <= 0)
@@ -134,7 +135,11 @@ public class PackMember : MonoBehaviour
             health = maxHealth;
         }
 
-        pack.UpdateHealth();
+        if (healthBar != null)
+        {
+            healthBar.UpdateBar(health, maxHealth);
+        }
+        
     }
 
     private void Death()
@@ -175,7 +180,6 @@ public class PackMember : MonoBehaviour
 
     protected static Vector2 RandomPointInCircle(float radius, float x, float y)
     {
-        Debug.Log(x + " " + y);
 
         //https://programming.guide/random-point-within-circle.html
 

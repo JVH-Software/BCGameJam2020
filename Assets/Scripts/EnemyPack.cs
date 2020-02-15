@@ -9,14 +9,9 @@ public class EnemyPack : PackMember
 {
 
     public Transform movementTarget;
-    public GameObject attackTarget;
     public float attackRange = 5f;
     public float agroRange = 7f;
 
-    public Vector2 _staticTarget;
-
-    // simulate global point array TODO: hook into point array
-    private List<Vector2> points = new List<Vector2>() { new Vector2(-3f, 5f) };
 
     public void Start() {
         var closestPoint = points.OrderBy(x => Vector2.Distance(transform.position, x)).First();
@@ -31,7 +26,7 @@ public class EnemyPack : PackMember
     {
 
         // Priority 1: If player is in agro range
-        if (Mathf.Abs(Vector3.Distance(transform.position, attackTarget.transform.position)) <= agroRange) {
+        if (attackTarget != null && Mathf.Abs(Vector3.Distance(transform.position, attackTarget.transform.position)) <= agroRange) {
             // move towards them
             Move(attackTarget.transform.position.x - 0.5f, attackTarget.transform.position.y - 0.5f) ;
         }
@@ -47,7 +42,7 @@ public class EnemyPack : PackMember
         }
 
         // If attack target is in attack range
-        if (Mathf.Abs(Vector2.Distance(transform.position,attackTarget.transform.position)) <= attackRange)
+        if (attackTarget != null && Mathf.Abs(Vector2.Distance(transform.position,attackTarget.transform.position)) <= attackRange)
         {
             Shoot(attackTarget.transform.position, pack);
         }
