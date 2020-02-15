@@ -45,6 +45,9 @@ public class ControlNodeObject : MonoBehaviour
         {
             node.setState(ControlNode.State.Empty);
         }
+        else if(numTeamsOnNode == 1){
+            node.setState(ControlNode.State.Capturing);
+        }
     }
 
     // Run every frame
