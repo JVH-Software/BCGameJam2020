@@ -7,17 +7,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
   
     public const int NUM_NODES = 5;
+    private ControlNode[] nodeList;
 
-    //control Nodes
-    // - all the characters
-    // - returns the current controlling team
-
-    List<string> characters = new List<string>();
-    List<string> nodes = new List<string>();
-    //control Nodes 
-    void Start()
+    private void Awake()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -25,6 +19,11 @@ public class GameManager : MonoBehaviour
     {
         
     }
-
     
+    public ControlNode getNode(int index)
+    {
+        return nodeList[index];
+    }
+
+
 }

@@ -2,7 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlNode : MonoBehaviour
+public class ControlNode
 {
+    public enum Team {Wolves, Bears, Chickens, NoTeam}
+    public enum State {Captured, Capturing, Empty, Contested}
 
+    private Team owner;
+    private State status;
+
+
+    public ControlNode()
+    {
+        owner = Team.NoTeam;
+        status = State.Empty;
+    }
+
+    // Setters and Getters
+    public Team getTeam()
+    {
+        return owner;
+    }
+
+    public void setTeam(Team team)
+    {
+        owner = team;
+
+    }
+    public State getState()
+    {
+        return status;
+    }
+
+    public void setState(State state)
+    {
+        status = state;
+    }
 }
