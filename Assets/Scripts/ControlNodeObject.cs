@@ -5,29 +5,52 @@ using UnityEngine;
 public class ControlNodeObject : MonoBehaviour
 {
 
+    Collider2D region;
     private float capturePercentage;
-    private ControlNode node;
+    private int numTeamsOnNode;
 
+    private ControlNode node;
     private void Awake()
     {
-        node = new ControlNode();
+        region = GetComponentInParent<Collider2D>();
         capturePercentage = 0f;
+        node = new ControlNode();
+        numTeamsOnNode = 0;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        numTeamsOnNode++;
+        if(numTeamsOnNode > 1)
+        {
+            node.setState(ControlNode.State.Contested);
+        }
     }
 
     public void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Wolf")
+        if(numTeamsOnNode == 1)
         {
-            Debug.Log("Wolf has been detected");
+            node.setState(ControlNode.State.Capturing);
+        }
+    }
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        numTeamsOnNode--;
+        if(numTeamsOnNode == 0)
+        {
+            node.setState(ControlNode.State.Empty);
         }
     }
 
-    void capture()
+    private void Update()
     {
-
-        node.setTeam(ControlNode.Team.Wolves);
+        //printing the node state
+        Debug.Log(node.getState());
     }
 
-
-
+    public ControlNode getControlNode()
+    {
+        return node;
+    }
 }
