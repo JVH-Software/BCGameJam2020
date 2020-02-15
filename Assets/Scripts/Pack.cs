@@ -62,7 +62,7 @@ public class Pack : MonoBehaviour
 
         // Create and shoot bullet
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        bullet.GetComponent<Bullet>().Shoot(moveDirection);
+        bullet.GetComponent<Bullet>().Shoot(moveDirection, gameObject);
     }
 
     public void Hit(float damage)

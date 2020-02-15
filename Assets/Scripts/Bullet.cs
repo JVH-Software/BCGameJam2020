@@ -5,8 +5,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
+    public float damage = 1f;
+
     Rigidbody2D rbody;
     Vector2 movementVector;
+    GameObject shooter;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +20,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void FixedUpdate()
@@ -25,9 +28,23 @@ public class Bullet : MonoBehaviour
         rbody.MovePosition(rbody.position + movementVector * Time.deltaTime);
     }
 
-    public void Shoot(Vector2 movementVector)
+    public void Shoot(Vector2 movementVector, GameObject shooter)
     {
         this.movementVector = movementVector;
+        this.shooter = shooter;
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
     }
 
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        if(coll.gameObject.tag.Equals("UpperBarriers"))
+        {
+            Destroy(gameObject);
+        }
+        else if(coll.gameObject.tag.Equals("Pack"))
+        {
+            coll.gameObject.GetComponent<Pack>().Hit(damage);
+            Destroy(gameObject);
+        }
+    }
 }

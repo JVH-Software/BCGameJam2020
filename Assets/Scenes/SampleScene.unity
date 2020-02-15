@@ -8184,7 +8184,7 @@ GameObject:
   - component: {fileID: 1850035746}
   m_Layer: 0
   m_Name: UpperBarriers
-  m_TagString: Untagged
+  m_TagString: UpperBarriers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
