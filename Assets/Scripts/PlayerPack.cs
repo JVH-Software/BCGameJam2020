@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerPack : Pack
 {
-    void Start()
+    new void Start()
     {
-        
+        base.Start();
     }
 
     void Update()
