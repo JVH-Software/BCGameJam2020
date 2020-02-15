@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: [Pack, UpperBarriers, Wolf]
+  tags:
+  - Pack
+  - UpperBarriers
+  - Wolf
+  - Bear
   layers:
   - Default
   - TransparentFX
