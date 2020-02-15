@@ -97,6 +97,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+  knockbackStrength: 5
+  speed: 20
+  timeToDespawn: 1000
+  particleHit: {fileID: 5154098397788126034, guid: bafd62ed4b2aa724cbab5785a348f0b9,
+    type: 3}
+  particleShoot: {fileID: 3064451951839912465, guid: 62fe16570da80ec4280459344330a0f2,
+    type: 3}
 --- !u!50 &1181965088521826059
 Rigidbody2D:
   serializedVersion: 4
