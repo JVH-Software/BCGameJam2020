@@ -10,6 +10,7 @@ public class Pack : MonoBehaviour
     public float speed = 1f;
     public GameObject bulletPrefab;
     public float shootSpeed = 20f;
+    public SimpleHealthBar healthBar;
 
     protected UpgradeList upgrades;
 
@@ -80,6 +81,10 @@ public class Pack : MonoBehaviour
         else if(health > maxHealth)
         {
             health = maxHealth;
+        }
+
+        if(healthBar != null) {
+            healthBar.UpdateBar(health, maxHealth);
         }
     }
 
