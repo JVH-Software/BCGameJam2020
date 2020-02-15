@@ -601,6 +601,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &897990989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -513700905141702649, guid: 770a8d07c8aec9345a5ef6b31701c478,
+    type: 3}
+  m_PrefabInstance: {fileID: 1158478836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e35c9f822ceffb40bfceac7df0ff2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1120572092
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +689,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1626181541287665471}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1147539857 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -6776582778221850880, guid: e93eb1f0ddba8f44cb1b0d4045aa4e24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1626181541287665471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147539856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e35c9f822ceffb40bfceac7df0ff2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1147539862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1626181540148514473, guid: e93eb1f0ddba8f44cb1b0d4045aa4e24,
@@ -760,6 +784,11 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1746176230}
+    - target: {fileID: 5100197182686973858, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 897990989}
     - target: {fileID: 5100197182686973862, guid: 770a8d07c8aec9345a5ef6b31701c478,
         type: 3}
       propertyPath: m_Name
@@ -10780,6 +10809,11 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 505042887}
+    - target: {fileID: 1626181540148514475, guid: e93eb1f0ddba8f44cb1b0d4045aa4e24,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1147539857}
     - target: {fileID: 1626181540148514479, guid: e93eb1f0ddba8f44cb1b0d4045aa4e24,
         type: 3}
       propertyPath: m_Name
