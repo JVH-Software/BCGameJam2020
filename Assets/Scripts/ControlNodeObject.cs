@@ -18,7 +18,7 @@ public class ControlNodeObject : MonoBehaviour
         numTeamsOnNode = 0;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         numTeamsOnNode++;
         if(numTeamsOnNode > 1)
@@ -27,14 +27,14 @@ public class ControlNodeObject : MonoBehaviour
         }
     }
 
-    public void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collider)
     {
-        if(numTeamsOnNode == 1)
+        if (numTeamsOnNode == 1)
         {
             node.setState(ControlNode.State.Capturing);
         }
     }
-    public void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collider)
     {
         numTeamsOnNode--;
         if(numTeamsOnNode == 0)
@@ -47,6 +47,7 @@ public class ControlNodeObject : MonoBehaviour
     {
         //printing the node state
         Debug.Log(node.getState());
+        Debug.Log(numTeamsOnNode);
     }
 
     public ControlNode getControlNode()
