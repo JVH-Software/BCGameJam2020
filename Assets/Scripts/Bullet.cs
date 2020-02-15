@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     public float knockbackStrength = 5f;
     public float speed = 20f;
     public int timeToDespawn = 1000;
+    public GameObject particleHit;
+    public GameObject particleShoot;
 
     Rigidbody2D rbody;
     Vector2 movementVector;
@@ -37,6 +39,7 @@ public class Bullet : MonoBehaviour
 
     public void Shoot(Vector2 movementVector, Pack shooter)
     {
+        Instantiate(particleShoot, transform.position, transform.rotation);
         this.movementVector = movementVector;
         this.shooter = shooter;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
@@ -46,10 +49,12 @@ public class Bullet : MonoBehaviour
     {
         if(coll.gameObject.tag.Equals("UpperBarriers"))
         {
+            Instantiate(particleHit, transform.position, transform.rotation);
             Destroy(gameObject);
         }
         else if(coll.gameObject.tag.Equals("Pack"))
         {
+            Instantiate(particleHit, transform.position, transform.rotation);
             coll.gameObject.GetComponent<Pack>().Hit(damage, movementVector * knockbackStrength);
             Destroy(gameObject);
         }
