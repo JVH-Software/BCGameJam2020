@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   maxHealth: 10
-  speed: 1
+  speed: 8
   pack: {fileID: 0}
+  tilemap: {fileID: 0}
   movementTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   attackRange: 5
   agroRange: 7
   _staticTarget: {x: 0, y: 0}
-  tilemap: {fileID: 0}
 --- !u!1001 &47560803836987392
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32,7 +32,7 @@ PrefabInstance:
     - target: {fileID: 673663751237002444, guid: 8561fcc289ae67f43bf6cfe931ab5dae,
         type: 3}
       propertyPath: m_Name
-      value: Pack Leader
+      value: Enemy Pack Leader
       objectReference: {fileID: 0}
     - target: {fileID: 3121214119736666157, guid: 8561fcc289ae67f43bf6cfe931ab5dae,
         type: 3}

@@ -11,8 +11,6 @@ public class PlayerPack : PackMember
 
     new void Update()
     {
-        base.Update();
-
         // Movement
         movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 

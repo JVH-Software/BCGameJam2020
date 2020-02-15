@@ -100,8 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   maxHealth: 10
-  speed: 1
+  speed: 8
   pack: {fileID: 0}
+  tilemap: {fileID: 0}
 --- !u!114 &8427246947917584339
 MonoBehaviour:
   m_ObjectHideFlags: 0

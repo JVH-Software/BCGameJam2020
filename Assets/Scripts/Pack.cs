@@ -14,6 +14,7 @@ public class Pack : MonoBehaviour
     public Transform respawnPoint;
     public int respawnTime = 500;
     public List<PackMember> packMembers;
+    public PackMember packLeader;
 
     private int respawnDelay = 0;
     private bool dead = false;

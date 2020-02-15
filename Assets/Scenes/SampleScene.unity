@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14de6b6fe3164e140aaa247731dc6e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 1980033257}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -468,6 +468,16 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1453668271}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: speed
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0154f82a19e55134c9866883e9a45872, type: 3}
 --- !u!114 &565875752 stripped
@@ -560,6 +570,16 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1453668271}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: speed
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0154f82a19e55134c9866883e9a45872, type: 3}
 --- !u!114 &591382550 stripped
@@ -845,6 +865,11 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1866118072}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0154f82a19e55134c9866883e9a45872, type: 3}
 --- !u!114 &1040745607 stripped
@@ -1084,6 +1109,11 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1866118072}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0154f82a19e55134c9866883e9a45872, type: 3}
 --- !u!114 &1308992448 stripped
@@ -1104,6 +1134,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1308992447}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1433562753 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 433716420320247720, guid: d2f6e3736dc015941977c1d03e9a385f,
+    type: 3}
+  m_PrefabInstance: {fileID: 800750260016946955}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449f297f98a76164eb7773348dbeb279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1453668270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1142,6 +1184,8 @@ MonoBehaviour:
   - {fileID: 90485600447257314}
   - {fileID: 565875752}
   - {fileID: 591382550}
+  - {fileID: 1980033258}
+  packLeader: {fileID: 1980033258}
 --- !u!4 &1453668272
 Transform:
   m_ObjectHideFlags: 0
@@ -10997,6 +11041,8 @@ MonoBehaviour:
   - {fileID: 1308992448}
   - {fileID: 1040745607}
   - {fileID: 1915948170}
+  - {fileID: 1433562753}
+  packLeader: {fileID: 1433562753}
 --- !u!4 &1866118073
 Transform:
   m_ObjectHideFlags: 0
@@ -11087,6 +11133,11 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1866118072}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0154f82a19e55134c9866883e9a45872, type: 3}
 --- !u!114 &1915948170 stripped
@@ -11107,6 +11158,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1915948169}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1980033257 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 673663751237002444, guid: 8561fcc289ae67f43bf6cfe931ab5dae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5783551859162893047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1980033258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7789012805246185145, guid: 8561fcc289ae67f43bf6cfe931ab5dae,
+    type: 3}
+  m_PrefabInstance: {fileID: 5783551859162893047}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980033257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b026a4af69aff149b8bc4452e8b9dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2059130155
 GameObject:
   m_ObjectHideFlags: 0
@@ -11279,6 +11348,16 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1453668271}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
+    - target: {fileID: 6086679081981093375, guid: 0154f82a19e55134c9866883e9a45872,
+        type: 3}
+      propertyPath: speed
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0154f82a19e55134c9866883e9a45872, type: 3}
 --- !u!114 &90485600447257314 stripped
@@ -11311,6 +11390,11 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1866118072}
+    - target: {fileID: 433716420320247720, guid: d2f6e3736dc015941977c1d03e9a385f,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
     - target: {fileID: 716544926193970380, guid: d2f6e3736dc015941977c1d03e9a385f,
         type: 3}
       propertyPath: m_Name
@@ -11451,6 +11535,11 @@ PrefabInstance:
       propertyPath: pack
       value: 
       objectReference: {fileID: 1453668271}
+    - target: {fileID: 7789012805246185145, guid: 8561fcc289ae67f43bf6cfe931ab5dae,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8561fcc289ae67f43bf6cfe931ab5dae, type: 3}
 --- !u!4 &5783551859162893048 stripped

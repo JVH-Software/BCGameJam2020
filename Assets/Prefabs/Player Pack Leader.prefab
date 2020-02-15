@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   maxHealth: 10
-  speed: 1
+  speed: 8
   pack: {fileID: 0}
+  tilemap: {fileID: 0}
 --- !u!1001 &1050840611753047699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26,7 +27,7 @@ PrefabInstance:
     - target: {fileID: 561824486460084831, guid: 0154f82a19e55134c9866883e9a45872,
         type: 3}
       propertyPath: m_Name
-      value: Pack Leader
+      value: Player Pack Leader
       objectReference: {fileID: 0}
     - target: {fileID: 2721742406974070462, guid: 0154f82a19e55134c9866883e9a45872,
         type: 3}
