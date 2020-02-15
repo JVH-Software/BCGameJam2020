@@ -68,8 +68,6 @@ public class EnemyPack : Pack
         // 1 + (r-1) because I don't want the inner circle to be the target(impassable terrain)
         float r = 1 + (radius-1 * Mathf.Sqrt((float)random.NextDouble()));
 
-        Debug.Log(angle);
-        Debug.Log(r);
         return new Vector2(x + (r * Mathf.Cos(angle)), y + (r * Mathf.Sin(angle)));
     }
 
