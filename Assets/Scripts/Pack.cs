@@ -11,6 +11,8 @@ public class Pack : MonoBehaviour
     public GameObject bulletPrefab;
     public float shootSpeed = 20f;
 
+    protected UpgradeList upgrades;
+
     Rigidbody2D rbody;
     Animator anim;
     protected Vector2 movementVector = Vector2.zero;
@@ -19,6 +21,7 @@ public class Pack : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        upgrades = new UpgradeList(this);
     }
 
     public void FixedUpdate()
@@ -55,6 +58,8 @@ public class Pack : MonoBehaviour
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
         bullet.GetComponent<Bullet>().Shoot(moveDirection);
+
+        upgrades.Add(Upgrades.FasterShot);
     }
 
     public void Hit(float damage)
