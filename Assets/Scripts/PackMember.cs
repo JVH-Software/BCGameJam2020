@@ -10,6 +10,7 @@ public class PackMember : MonoBehaviour
     public float maxHealth = 10f;
     public float speed = 1f;
     public Pack pack;
+    public GameObject attackTarget;
 
     public UnityEngine.Tilemaps.Tilemap tilemap;
 
@@ -22,12 +23,22 @@ public class PackMember : MonoBehaviour
     Rigidbody2D rbody;
     Animator anim;
     protected Vector2 movementVector = Vector2.zero;
+    GameObject packs;
+    public Vector2 _staticTarget;
+
+    private List<Vector2> points = new List<Vector2>() { new Vector2(-3f, 5f) };
+
+
 
     public void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         gun = GetComponent<Gun>();
+        packs = GameObject.Find("Packs");
+        _staticTarget = GetClosestWalkableTile(RandomPointInCircle(3f, pack.packLeader.transform.position.x, pack.packLeader.transform.position.y));
+
+
     }
 
     public void FixedUpdate()
@@ -37,8 +48,36 @@ public class PackMember : MonoBehaviour
 
     public void Update()
     {
-        Move(GetClosestWalkableTile(RandomPointInCircle(5f, pack.packLeader.transform.position.x, pack.packLeader.transform.position.y)));
+        if (!gameObject.tag.Equals("Player"))
+        {
+            for (int i = 0; i < packs.transform.childCount; i++)
+            {
+                for (int j = 0; j < packs.transform.GetChild(i).childCount; j++)
+                {
+                    if (Vector3.Distance(transform.position, packs.transform.GetChild(i).GetChild(j).transform.position) < 5 && !packs.transform.GetChild(i).GetChild(j).tag.Equals(gameObject.tag))
+                    {
+                        attackTarget = packs.transform.GetChild(i).GetChild(j).gameObject;
+                    }
+                }
+            }
+
+            if (Vector3.Distance(transform.position, attackTarget.transform.position) < 5)
+            {
+                Shoot(attackTarget.transform.position, pack);
+            }
+        }
+
+        if (points.Count > 0)
+        {
+            if (Mathf.Abs(Vector2.Distance(_staticTarget, new Vector2(transform.position.x, transform.position.y))) <= 2)
+            {
+                _staticTarget = GetClosestWalkableTile(RandomPointInCircle(3f, pack.packLeader.transform.position.x, pack.packLeader.transform.position.y));
+            }
+
+            Move(_staticTarget);
+        }
     }
+
 
     private void PerformMovement()
     {

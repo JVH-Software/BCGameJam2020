@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 585966213169737356}
   - component: {fileID: 8828406245665975800}
   - component: {fileID: 1966986717224339092}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pack Member
   m_TagString: Pack
   m_Icon: {fileID: 0}
@@ -102,7 +102,9 @@ MonoBehaviour:
   maxHealth: 10
   speed: 8
   pack: {fileID: 0}
+  attackTarget: {fileID: 0}
   tilemap: {fileID: 0}
+  _staticTarget: {x: 0, y: 0}
 --- !u!114 &8427246947917584339
 MonoBehaviour:
   m_ObjectHideFlags: 0

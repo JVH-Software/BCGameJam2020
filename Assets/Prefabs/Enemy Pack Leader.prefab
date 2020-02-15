@@ -16,7 +16,9 @@ MonoBehaviour:
   maxHealth: 10
   speed: 8
   pack: {fileID: 0}
+  attackTarget: {fileID: 0}
   tilemap: {fileID: 0}
+  _staticTarget: {x: 0, y: 0}
   movementTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   attackRange: 5

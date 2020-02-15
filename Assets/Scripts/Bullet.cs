@@ -48,16 +48,21 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        PackMember pm;
         if(coll.gameObject.tag.Equals("UpperBarriers"))
         {
             Instantiate(particleHit, transform.position, transform.rotation);
             Destroy(gameObject);
         }
-        else if(coll.gameObject.tag.Equals("Pack"))
+        else if(coll.gameObject.TryGetComponent<PackMember>(out pm))
         {
-            Instantiate(particleHit, transform.position, transform.rotation);
-            coll.gameObject.GetComponent<PackMember>().Hit(gun.damage, movementVector * gun.knockbackStrength);
-            Destroy(gameObject);
+            // No friendly fire (for now)
+            if (!coll.tag.Equals(shooter.tag))
+            {
+                Instantiate(particleHit, transform.position, transform.rotation);
+                coll.gameObject.GetComponent<PackMember>().Hit(gun.damage, movementVector * gun.knockbackStrength);
+                Destroy(gameObject);
+            }
         }
     }
 }
