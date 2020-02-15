@@ -5,9 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    public float damage = 1f;
-    public float knockbackStrength = 5f;
-    public float speed = 20f;
     public int timeToDespawn = 1000;
     public GameObject particleHit;
     public GameObject particleShoot;
@@ -15,6 +12,7 @@ public class Bullet : MonoBehaviour
     Rigidbody2D rbody;
     Vector2 movementVector;
     Pack shooter;
+    Gun gun;
 
     // Start is called before the first frame update
     void Start()
@@ -34,14 +32,15 @@ public class Bullet : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed * shooter.shootSpeedMultiplier);
+        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * gun.projectileSpeed * shooter.projectileSpeedMultiplier);
     }
 
-    public void Shoot(Vector2 movementVector, Pack shooter)
+    public void Shoot(Vector2 movementVector, Pack shooter, Gun gun)
     {
         Instantiate(particleShoot, transform.position, transform.rotation);
         this.movementVector = movementVector;
         this.shooter = shooter;
+        this.gun = gun;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
     }
 
@@ -55,7 +54,7 @@ public class Bullet : MonoBehaviour
         else if(coll.gameObject.tag.Equals("Pack"))
         {
             Instantiate(particleHit, transform.position, transform.rotation);
-            coll.gameObject.GetComponent<Pack>().Hit(damage, movementVector * knockbackStrength);
+            coll.gameObject.GetComponent<Pack>().Hit(gun.damage, movementVector * gun.knockbackStrength);
             Destroy(gameObject);
         }
     }

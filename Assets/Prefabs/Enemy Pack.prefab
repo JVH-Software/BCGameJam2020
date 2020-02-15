@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5100197182686973857}
   - component: {fileID: 5100197182686973863}
   - component: {fileID: 5100197182686973858}
+  - component: {fileID: -513700905141702649}
   m_Layer: 0
   m_Name: Enemy Pack
   m_TagString: Pack
@@ -116,8 +117,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 20
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -155,12 +156,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   maxHealth: 10
-  speed: 1
-  bulletPrefab: {fileID: 5061695325340694261, guid: ee2e273b0274ddd49a6b707329e3094c,
-    type: 3}
-  shootSpeedMultiplier: 1
+  speed: 10
+  projectileSpeedMultiplier: 1
   healthBar: {fileID: 0}
+  gun: {fileID: -513700905141702649}
   movementTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   attackRange: 5
   tilemap: {fileID: 0}
+--- !u!114 &-513700905141702649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5100197182686973862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e35c9f822ceffb40bfceac7df0ff2a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 5061695325340694261, guid: ee2e273b0274ddd49a6b707329e3094c,
+    type: 3}
+  rateOfFire: 100
+  projectileSpeed: 25
+  damage: 1
+  knockbackStrength: 10
+  recoil: 1
+  spread: 0.2
