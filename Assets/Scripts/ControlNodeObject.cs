@@ -10,15 +10,16 @@ public class ControlNodeObject : MonoBehaviour
     private int numTeamsOnNode;
 
     private ControlNode node;
-    private const double CAPTURE_RATE = 1/3f;
-    private string occupyingTeam;
+    private const double CAPTURE_RATE = 1/4f;
+    private ControlNode occupyingTeam;
+
     private void Awake()
     {
         region = GetComponentInParent<Collider2D>();
         capturePercentage = 0f;
         node = new ControlNode();
         numTeamsOnNode = 0;
-        occupyingTeam = "NoTeam";
+        occupyingTeam = occupyingTeam.NoTeam;
         StartCoroutine("capture");
     }
 
