@@ -13,24 +13,21 @@ public class Pack : MonoBehaviour
     Animator anim;
     protected Vector2 movementVector = Vector2.zero;
 
-    void Start()
+    public void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        
-    }
-
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         PerformMovement();
     }
 
     private void PerformMovement()
     {
+        /* Sample code for future animation
+    
         if (movementVector != Vector2.zero)
         {
             anim.SetBool("Iswalking", true);
@@ -41,6 +38,7 @@ public class Pack : MonoBehaviour
         {
             anim.SetBool("Iswalking", false);
         }
+        */
 
         rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed);
     }
