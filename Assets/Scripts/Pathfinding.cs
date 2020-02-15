@@ -18,7 +18,6 @@ public class Pathfinding : MonoBehaviour
     /// <param name="path">The path created</param>
     public static void FindPath(Vector2Int start, Vector2Int target, Tilemap tilemap, out List<Node> path)
     {
-        Debug.Log("looking for path");
         path = new List<Node>();
         Node startNode = new Node(start.x, start.y, true);
         Node targetNode = new Node(target.x, target.y, true);
@@ -76,8 +75,6 @@ public class Pathfinding : MonoBehaviour
             path.Add(currentNode);
             currentNode = currentNode.Parent;
         }
-        Debug.Log("path found, steps: " + path.Count);
-
         path.Reverse();
         return path;
     }
