@@ -71,8 +71,9 @@ public class EnemyPack : Pack
         return new Vector2(x + (r * Mathf.Cos(angle)), y + (r * Mathf.Sin(angle)));
     }
 
-    void Update()
+    new void Update()
     {
+        base.Update();
 
 
         // Priority 1: If player is in agro range

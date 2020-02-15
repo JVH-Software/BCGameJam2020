@@ -35,9 +35,10 @@ public class Pack : MonoBehaviour
         PerformMovement();
     }
 
-    private void Update()
+    public void Update()
     {
-        respawnDelay -= 1;
+        respawnDelay--;
+        Debug.Log(respawnDelay);
         if (respawnDelay < 0)
         {
             respawnDelay = 0;

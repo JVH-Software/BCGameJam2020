@@ -9,8 +9,10 @@ public class PlayerPack : Pack
         base.Start();
     }
 
-    void Update()
+    new void Update()
     {
+        base.Update();
+
         // Movement
         movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 

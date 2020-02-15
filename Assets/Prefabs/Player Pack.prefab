@@ -103,7 +103,9 @@ MonoBehaviour:
   speed: 10
   projectileSpeedMultiplier: 1
   healthBar: {fileID: 0}
-  gun: {fileID: -6776582778221850880}
+  respawnPoint: {fileID: 0}
+  respawnTime: 150
+  gun: {fileID: 0}
 --- !u!95 &1626181540148514476
 Animator:
   serializedVersion: 3

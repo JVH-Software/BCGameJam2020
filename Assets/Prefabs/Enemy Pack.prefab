@@ -159,10 +159,14 @@ MonoBehaviour:
   speed: 10
   projectileSpeedMultiplier: 1
   healthBar: {fileID: 0}
-  gun: {fileID: -513700905141702649}
+  respawnPoint: {fileID: 0}
+  respawnTime: 150
+  gun: {fileID: 0}
   movementTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   attackRange: 5
+  agroRange: 7
+  _staticTarget: {x: 0, y: 0}
   tilemap: {fileID: 0}
 --- !u!114 &-513700905141702649
 MonoBehaviour:
