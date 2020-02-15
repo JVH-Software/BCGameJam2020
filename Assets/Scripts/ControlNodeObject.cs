@@ -4,95 +4,159 @@ using UnityEngine;
 
 public class ControlNodeObject : MonoBehaviour
 {
+    private const string WOLF_TAG = "Wolf";
+    private const string BEAR_TAG = "Bear";
 
-    Collider2D region;
     private double capturePercentage;
     private int numTeamsOnNode;
 
     private ControlNode node;
     private const double CAPTURE_RATE = 1/3f;
-    private string occupyingTeam;
+    private ControlNode.Team occupyingTeam;
+
+    SpriteRenderer renderer;
     private void Awake()
     {
-        region = GetComponentInParent<Collider2D>();
         capturePercentage = 0f;
         node = new ControlNode();
         numTeamsOnNode = 0;
-        occupyingTeam = "NoTeam";
+        occupyingTeam = node.getTeam();
+        renderer = GetComponent<SpriteRenderer>();
         StartCoroutine("capture");
+        
+    }
+    bool isEntity(string tag)
+    {
+        return (tag == WOLF_TAG|| tag == BEAR_TAG);
+    }
+
+    ControlNode.Team convertTagToTeam(string tag)
+    {
+        switch (tag)
+        {
+            case WOLF_TAG:
+                return ControlNode.Team.Wolves;
+            case BEAR_TAG:
+                return ControlNode.Team.Bears;
+            default:
+                return ControlNode.Team.NoTeam;
+        }
     }
 
     // For trigger implementation, the incoming gameobject must have a 
+
+    //Enter sets contesting state
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        numTeamsOnNode++;
-        if(numTeamsOnNode > 1)
+
+        //Takes in an object, calls controlNode enter
+        string tag = collider.gameObject.tag;
+        if (isEntity(tag))
         {
-            node.setState(ControlNode.State.Contested);
-        }
-        else
-        {
-            occupyingTeam = collider.gameObject.tag;
+            numTeamsOnNode++;
+            ControlNode.Team incomingTeam = convertTagToTeam(tag);
+            if(occupyingTeam != incomingTeam && numTeamsOnNode > 1)
+            {
+                node.setState(ControlNode.State.Contested);
+                occupyingTeam = ControlNode.Team.NoTeam;
+            }
+            else if(occupyingTeam != incomingTeam)
+            {
+                occupyingTeam = incomingTeam;
+            }
+
         }
     }
 
+    //Stay sets capturing state, allows the occupying team(whatever is staying on the collider to capture)
     private void OnTriggerStay2D(Collider2D collider)
     {
-        if (numTeamsOnNode == 1 && node.getState() != ControlNode.State.Contested)
+        string tag = collider.gameObject.tag;
+        if (isEntity(tag))
         {
-            node.setState(ControlNode.State.Capturing);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        numTeamsOnNode--;
-        if(numTeamsOnNode == 0)
-        {
-            occupyingTeam = "NoTeam";
-            node.setState(ControlNode.State.Empty);
-        }
-        else if(numTeamsOnNode == 1 && node.getState() != ControlNode.State.Contested)
-        {
-            node.setState(ControlNode.State.Capturing);
+            if(numTeamsOnNode == 1)
+            {
+                occupyingTeam = convertTagToTeam(tag);
+                node.setState(ControlNode.State.Capturing);
+            }
         }
     }
 
-    public ControlNode getControlNode()
+    //handles when a previous team leaves and when there is no one on tag
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        return node;
+        string tag = collision.gameObject.tag;
+        if (isEntity(tag))
+        {
+            
+            ControlNode.Team leavingTeam = convertTagToTeam(tag);
+            Debug.Log("Object that has left: " + leavingTeam);
+            numTeamsOnNode--;
+            if (occupyingTeam == leavingTeam)
+            {
+                occupyingTeam = ControlNode.Team.NoTeam;
+                capturePercentage = 0;
+            }
+            
+            if(numTeamsOnNode == 0 && node.getState() != ControlNode.State.Captured)
+            {
+                node.setState(ControlNode.State.Empty);
+            }
+        }
     }
-    public void Update()
+    /*private void Update()
     {
-        Debug.Log(occupyingTeam);
-    }
+        /*Debug.Log("Control Point State: " + node.getState());
+        Debug.Log("The Occupying Team: " + occupyingTeam);
+        Debug.Log("Node Captured by: " + node.getTeam());
+        Debug.Log("Number of factions at Node: " + numTeamsOnNode);
+    }*/
+
     IEnumerator capture()
     { 
         while (true)
         {
+            
             ControlNode.State nodeStatus = node.getState();
-            if(capturePercentage >= 1 && nodeStatus != ControlNode.State.Contested)
-            {
-                Debug.Log("Captured");
-                node.setState(ControlNode.State.Captured);
-            }
-            else if (nodeStatus == ControlNode.State.Capturing && capturePercentage < 1)
-            {
-                Debug.Log("Capturing State");
-                capturePercentage += CAPTURE_RATE * Time.deltaTime;
-                Debug.Log(capturePercentage);
-            }
-            else if(nodeStatus == ControlNode.State.Contested)
-            {
-                Debug.Log("Contested!");
-            }
-            else if(nodeStatus == ControlNode.State.Empty)
-            {
-                Debug.Log("Lost State");
-                capturePercentage = 0;
-            }
 
+            switch (nodeStatus)
+            {
+                case ControlNode.State.Empty:
+                    occupyingTeam = ControlNode.Team.NoTeam;
+                    capturePercentage = 0;
+                    renderer.color = Color.gray;
+                    break;
+
+                case ControlNode.State.Capturing:
+                    if(capturePercentage < 1)
+                    {
+                        capturePercentage += CAPTURE_RATE * Time.deltaTime;
+                        renderer.color = Color.green;
+                    }
+                    else
+                    {
+                        capturePercentage = 1;
+                        node.setState(ControlNode.State.Captured);                        
+                    }
+                    break;
+                case ControlNode.State.Contested:
+                    renderer.color = Color.red;
+                    break;
+                case ControlNode.State.Captured:
+                    node.setTeam(occupyingTeam);
+                    if (node.getTeam() == ControlNode.Team.Bears)
+                    {
+                        renderer.color = Color.black;
+                    }
+                    else if (node.getTeam() == ControlNode.Team.Wolves)
+                    {
+                        renderer.color = Color.blue;
+                    }
+                    break;
+                default:
+                    break;
+            }
             yield return null;
-
         }
         
     }
