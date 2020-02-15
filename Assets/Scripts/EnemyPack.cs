@@ -6,6 +6,8 @@ public class EnemyPack : Pack
 {
 
     public Transform movementTarget;
+    public GameObject attackTarget;
+    public float attackRange = 5f;
     public UnityEngine.Tilemaps.Tilemap tilemap;
 
     new void Start()
@@ -24,11 +26,9 @@ public class EnemyPack : Pack
         moveDirection.Normalize();
         movementVector = moveDirection;
         
-
-        /* Shoot
-        if (Input.GetMouseButtonDown(0))
+        if (Mathf.Abs(Vector2.Distance(transform.position,attackTarget.transform.position)) <= attackRange)
         {
-            Shoot();
-        }*/
+            Shoot(attackTarget.transform.position);
+        }
     }
 }

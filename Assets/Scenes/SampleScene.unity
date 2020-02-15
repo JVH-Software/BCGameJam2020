@@ -10240,6 +10240,11 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1746176230}
+    - target: {fileID: 5100197182686973858, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: attackTarget
+      value: 
+      objectReference: {fileID: 1147539856}
     - target: {fileID: 5100197182686973862, guid: 770a8d07c8aec9345a5ef6b31701c478,
         type: 3}
       propertyPath: m_Name
