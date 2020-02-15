@@ -11,6 +11,13 @@ public class PlayerPack : Pack
 
     void Update()
     {
+        // Movement
         movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        // Shoot
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
     }
 }

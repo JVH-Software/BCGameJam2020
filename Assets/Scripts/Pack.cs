@@ -8,6 +8,8 @@ public class Pack : MonoBehaviour
     public float health = 10f;
     public float maxHealth = 10f;
     public float speed = 1f;
+    public GameObject bulletPrefab;
+    public float shootSpeed = 20f;
 
     Rigidbody2D rbody;
     Animator anim;
@@ -43,9 +45,16 @@ public class Pack : MonoBehaviour
         rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed);
     }
      
-    private void Shoot()
+    protected void Shoot()
     {
-        Debug.Log(string.Format("{0} shot its gun.", name));
+        Vector3 moveDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+        moveDirection.z = 0;
+        moveDirection.Normalize();
+        moveDirection = moveDirection* shootSpeed;
+        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
+        bullet.GetComponent<Bullet>().Shoot(moveDirection);
     }
 
     public void Hit(float damage)
