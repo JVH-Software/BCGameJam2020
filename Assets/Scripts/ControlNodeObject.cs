@@ -11,13 +11,13 @@ public class ControlNodeObject : MonoBehaviour
 
     private ControlNode node;
     private const double CAPTURE_RATE = 1/3f;
-
-    SpriteRenderer renderer;
+    private string occupyingTeam;
     private void Awake()
     {
         capturePercentage = 0f;
         node = new ControlNode();
-        renderer = GetComponent<SpriteRenderer>();
+        numTeamsOnNode = 0;
+        occupyingTeam = "NoTeam";
         StartCoroutine("capture");
         
     }
