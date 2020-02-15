@@ -10,14 +10,25 @@ public class ControlNodeObject : MonoBehaviour
     private double capturePercentage;
 
     private ControlNode node;
+<<<<<<< HEAD
     private const double CAPTURE_RATE = 1/3f;
-    private SpriteRenderer renderer;
 
+    SpriteRenderer renderer;
+=======
+    private const double CAPTURE_RATE = 1/4f;
+    private ControlNode occupyingTeam;
+
+>>>>>>> c6d1c37731ee243f93160374fb71385068dd36a4
     private void Awake()
     {
-        renderer = GetComponent<SpriteRenderer>();
         capturePercentage = 0f;
         node = new ControlNode();
+<<<<<<< HEAD
+        renderer = GetComponent<SpriteRenderer>();
+=======
+        numTeamsOnNode = 0;
+        occupyingTeam = occupyingTeam.NoTeam;
+>>>>>>> c6d1c37731ee243f93160374fb71385068dd36a4
         StartCoroutine("capture");
         
     }

@@ -85,14 +85,7 @@ public class ControlNode
         return (percentageOfCapture == 0 && owner == Team.NoTeam && status == State.Empty && capturingTeam == Team.NoTeam && challengers.Count == 0);
     }
 
-    public bool isOwnerOccupying()
-    {
-        return owner == capturingTeam;
-    }
-    public bool isUncontested()
-    {
-        return !isOwnerOccupying() && isEmptyState();
-    }
+
     public void Enter(Team challenger)
     {
         if(challenger != owner)
@@ -113,12 +106,19 @@ public class ControlNode
 
     public void Stay(Team stayingTeam)
     {
-        if(getState() != State.Contested)
+        if(stayingTeam != owner)
         {
-            setState(State.Capturing, stayingTeam);
+            //#1. runs the capture state for the staying team incase it hasn't
+            if(status != State.Capturing && status != State.Contested)
+            {
+                setState(State.Capturing, stayingTeam);
+            }
+            //#2. runs contested if it happens to be contesting
+            else if (!challengers.Contains(stayingTeam))
+            {
+                setState(State.Contested, stayingTeam);
+            }
         }
-
-
     }
 
     public void Leave(Team leavingTeam)
@@ -138,8 +138,7 @@ public class ControlNode
         //#2. if owner has left, let the challengers take over
         else if(leavingTeam == owner)
         {
-            //empty the node
-
+            
             //if single challenger, let challenger capture
             if (challengers.Count == 1)
             {
@@ -169,6 +168,7 @@ public class ControlNode
         {
             setState(State.Captured, capturingTeam);
         }
+
     }
     public void debugDisplay()
     {
