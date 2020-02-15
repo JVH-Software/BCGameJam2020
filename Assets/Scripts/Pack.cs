@@ -8,9 +8,9 @@ public class Pack : MonoBehaviour
     public float health = 10f;
     public float maxHealth = 10f;
     public float speed = 1f;
-    public GameObject bulletPrefab;
-    public float shootSpeedMultiplier = 1f;
+    public float projectileSpeedMultiplier = 1f;
     public SimpleHealthBar healthBar;
+    public Gun gun;
 
     protected UpgradeList upgrades;
 
@@ -46,29 +46,23 @@ public class Pack : MonoBehaviour
         }
         */
 
-        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed);
+        rbody.velocity = (rbody.velocity + movementVector * Time.deltaTime * speed);
     }
      
     protected void Shoot(Vector3 target)
     {
-        // Compute bullet movement vector
-        Vector3 moveDirection = (target - transform.position);
-        moveDirection.z = 0;
-        moveDirection.Normalize();
-
-        // Compute bullet rotation
-        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        // Create and shoot bullet
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        bullet.GetComponent<Bullet>().Shoot(moveDirection, this);
+        gun.Shoot(target, this);
     }
 
     public void Hit(float damage, Vector2 knockback)
     {
         ModifyHealth(-damage);
-        rbody.velocity = rbody.velocity + (rbody.position + knockback);
+        Knockback(knockback);
+    }
+
+    public void Knockback(Vector2 knockback)
+    {
+        rbody.velocity = (rbody.velocity + knockback);
     }
 
     private void ModifyHealth(float amount)
