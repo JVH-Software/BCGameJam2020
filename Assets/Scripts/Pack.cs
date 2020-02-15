@@ -11,6 +11,7 @@ public class Pack : MonoBehaviour
 
     Rigidbody2D rbody;
     Animator anim;
+    protected Vector2 movementVector = Vector2.zero;
 
     void Start()
     {
@@ -25,21 +26,25 @@ public class Pack : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 movement_vector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        PerformMovement();
+    }
 
-        if (movement_vector != Vector2.zero)
+    private void PerformMovement()
+    {
+        if (movementVector != Vector2.zero)
         {
             anim.SetBool("Iswalking", true);
-            anim.SetFloat("Input_x", movement_vector.x);
-            anim.SetFloat("Input_y", movement_vector.y);
+            anim.SetFloat("Input_x", movementVector.x);
+            anim.SetFloat("Input_y", movementVector.y);
         }
         else
         {
             anim.SetBool("Iswalking", false);
         }
 
-        rbody.MovePosition(rbody.position + movement_vector * Time.deltaTime);
+        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed);
     }
+     
     private void Shoot()
     {
         Debug.Log(string.Format("{0} shot its gun.", name));
