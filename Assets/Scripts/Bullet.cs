@@ -12,7 +12,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
-
     }
 
     // Update is called once per frame

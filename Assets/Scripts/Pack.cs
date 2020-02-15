@@ -50,16 +50,19 @@ public class Pack : MonoBehaviour
      
     protected void Shoot()
     {
+        // Compute bullet movement vector
         Vector3 moveDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
         moveDirection.z = 0;
         moveDirection.Normalize();
         moveDirection = moveDirection* shootSpeed;
+
+        // Compute bullet rotation
         float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        // Create and shoot bullet
         GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
         bullet.GetComponent<Bullet>().Shoot(moveDirection);
-
-        upgrades.Add(Upgrades.FasterShot);
     }
 
     public void Hit(float damage)
