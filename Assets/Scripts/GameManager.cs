@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
   
     public const int NUM_NODES = 5;
-    private ControlNode[] nodeList;
+    //private ControlNode[] nodeList;
 
     private void Awake()
     {
@@ -22,7 +22,8 @@ public class GameManager : MonoBehaviour
     
     public ControlNode getNode(int index)
     {
-        return nodeList[index];
+        //return nodeList[index];
+        return null; 
     }
 
 
