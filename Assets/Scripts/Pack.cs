@@ -22,6 +22,8 @@ public class Pack : MonoBehaviour
     Rigidbody2D rbody;
     Animator anim;
     protected Vector2 movementVector = Vector2.zero;
+    public float damageMultiplier = 1;
+    public float defenceMultiplier = 1;
 
     public void Start()
     {
