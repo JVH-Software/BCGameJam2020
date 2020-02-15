@@ -17,7 +17,7 @@ public class PlayerPack : Pack
         // Shoot
         if (Input.GetMouseButtonDown(0))
         {
-            Shoot();
+            Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 }

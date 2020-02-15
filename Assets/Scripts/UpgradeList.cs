@@ -21,7 +21,7 @@ public class UpgradeList : List<Upgrades>
                 pack.speed += 3;
                 break;
             case Upgrades.FasterShot:
-                pack.shootSpeed += 50;
+                pack.projectileSpeedMultiplier *= 2;
                 break;
         }
     }
@@ -36,7 +36,7 @@ public class UpgradeList : List<Upgrades>
                 pack.speed -= 3;
                 break;
             case Upgrades.FasterShot:
-                pack.shootSpeed -= 50;
+                pack.projectileSpeedMultiplier *= 1/2;
                 break;
         }
     }

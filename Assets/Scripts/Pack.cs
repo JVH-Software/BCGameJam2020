@@ -8,8 +8,14 @@ public class Pack : MonoBehaviour
     public float health = 10f;
     public float maxHealth = 10f;
     public float speed = 1f;
-    public GameObject bulletPrefab;
-    public float shootSpeed = 20f;
+    public float projectileSpeedMultiplier = 1f;
+    public SimpleHealthBar healthBar;
+    public Transform respawnPoint;
+    public int respawnTime = 500;
+
+    private int respawnDelay = 0;
+    private bool dead = false;
+    public Gun gun;
 
     protected UpgradeList upgrades;
 
@@ -29,8 +35,27 @@ public class Pack : MonoBehaviour
         PerformMovement();
     }
 
+    private void Update()
+    {
+        respawnDelay -= 1;
+        if (respawnDelay < 0)
+        {
+            respawnDelay = 0;
+            if(dead)
+            {
+                dead = false;
+                ModifyHealth(maxHealth);
+                transform.position = respawnPoint.position;
+            }
+        }
+    }
+
     private void PerformMovement()
     {
+
+        if (dead)
+            return;
+
         /* Sample code for future animation
     
         if (movementVector != Vector2.zero)
@@ -45,29 +70,27 @@ public class Pack : MonoBehaviour
         }
         */
 
-        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed);
+        rbody.velocity = (rbody.velocity + movementVector * Time.deltaTime * speed);
     }
      
-    protected void Shoot()
+    protected void Shoot(Vector3 target)
     {
-        // Compute bullet movement vector
-        Vector3 moveDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
-        moveDirection.z = 0;
-        moveDirection.Normalize();
-        moveDirection = moveDirection* shootSpeed;
+        if (dead)
+            return;
 
-        // Compute bullet rotation
-        float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        gun.Shoot(target, this);
 
-        // Create and shoot bullet
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, rotation);
-        bullet.GetComponent<Bullet>().Shoot(moveDirection);
     }
 
-    public void Hit(float damage)
+    public void Hit(float damage, Vector2 knockback)
     {
         ModifyHealth(-damage);
+        Knockback(knockback);
+    }
+
+    public void Knockback(Vector2 knockback)
+    {
+        rbody.velocity = (rbody.velocity + knockback);
     }
 
     private void ModifyHealth(float amount)
@@ -81,10 +104,15 @@ public class Pack : MonoBehaviour
         {
             health = maxHealth;
         }
+
+        if(healthBar != null) {
+            healthBar.UpdateBar(health, maxHealth);
+        }
     }
 
     private void Death()
     {
-        Debug.Log(string.Format("{0} died.", name));
+        dead = true;
+        respawnDelay = respawnTime;
     }
 }
