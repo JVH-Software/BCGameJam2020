@@ -8,8 +8,8 @@ public class ControlNodeObject : MonoBehaviour
     Collider2D region;
     private float capturePercentage;
     private int numTeamsOnNode;
-
     private ControlNode node;
+
     private void Awake()
     {
         region = GetComponentInParent<Collider2D>();
@@ -18,6 +18,7 @@ public class ControlNodeObject : MonoBehaviour
         numTeamsOnNode = 0;
     }
 
+    // Collision detection when entering region
     private void OnTriggerEnter2D(Collider2D collider)
     {
         numTeamsOnNode++;
@@ -27,6 +28,7 @@ public class ControlNodeObject : MonoBehaviour
         }
     }
 
+    // Collision detection when staying/capturing region
     private void OnTriggerStay2D(Collider2D collider)
     {
         if (numTeamsOnNode == 1)
@@ -34,6 +36,8 @@ public class ControlNodeObject : MonoBehaviour
             node.setState(ControlNode.State.Capturing);
         }
     }
+
+    // Collision detection when leaving region
     private void OnTriggerExit2D(Collider2D collider)
     {
         numTeamsOnNode--;
@@ -46,6 +50,7 @@ public class ControlNodeObject : MonoBehaviour
         }
     }
 
+    // Run every frame
     private void Update()
     {
         //printing the node state
