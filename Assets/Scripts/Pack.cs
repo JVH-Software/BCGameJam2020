@@ -48,10 +48,10 @@ public class Pack : MonoBehaviour
         rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed);
     }
      
-    protected void Shoot()
+    protected void Shoot(Vector3 target)
     {
         // Compute bullet movement vector
-        Vector3 moveDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+        Vector3 moveDirection = (target - transform.position);
         moveDirection.z = 0;
         moveDirection.Normalize();
 

@@ -1452,13 +1452,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1278548242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f921cabf71da35c48a81be0e8c584774, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1746176227
+--- !u!4 &1147539862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1626181540148514473, guid: e93eb1f0ddba8f44cb1b0d4045aa4e24,
+    type: 3}
+  m_PrefabInstance: {fileID: 1626181541287665471}
+  m_PrefabAsset: {fileID: 0}
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11156,3 +11155,87 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e93eb1f0ddba8f44cb1b0d4045aa4e24, type: 3}
+--- !u!1001 &5789044367042262895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973856, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100197182686973858, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: movementTarget
+      value: 
+      objectReference: {fileID: 1147539862}
+    - target: {fileID: 5100197182686973858, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: tilemap
+      value: 
+      objectReference: {fileID: 1746176230}
+    - target: {fileID: 5100197182686973858, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: attackTarget
+      value: 
+      objectReference: {fileID: 1147539856}
+    - target: {fileID: 5100197182686973862, guid: 770a8d07c8aec9345a5ef6b31701c478,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Pack
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 770a8d07c8aec9345a5ef6b31701c478, type: 3}
