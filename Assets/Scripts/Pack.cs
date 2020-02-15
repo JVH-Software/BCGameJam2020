@@ -11,6 +11,11 @@ public class Pack : MonoBehaviour
     public GameObject bulletPrefab;
     public float shootSpeedMultiplier = 1f;
     public SimpleHealthBar healthBar;
+    public Transform respawnPoint;
+    public int respawnTime = 500;
+
+    private int respawnDelay = 0;
+    private bool dead = false;
 
     protected UpgradeList upgrades;
 
@@ -30,8 +35,27 @@ public class Pack : MonoBehaviour
         PerformMovement();
     }
 
+    private void Update()
+    {
+        respawnDelay -= 1;
+        if (respawnDelay < 0)
+        {
+            respawnDelay = 0;
+            if(dead)
+            {
+                dead = false;
+                ModifyHealth(maxHealth);
+                transform.position = respawnPoint.position;
+            }
+        }
+    }
+
     private void PerformMovement()
     {
+
+        if (dead)
+            return;
+
         /* Sample code for future animation
     
         if (movementVector != Vector2.zero)
@@ -51,6 +75,9 @@ public class Pack : MonoBehaviour
      
     protected void Shoot(Vector3 target)
     {
+        if (dead)
+            return;
+
         // Compute bullet movement vector
         Vector3 moveDirection = (target - transform.position);
         moveDirection.z = 0;
@@ -90,6 +117,7 @@ public class Pack : MonoBehaviour
 
     private void Death()
     {
-        Debug.Log(string.Format("{0} died.", name));
+        dead = true;
+        respawnDelay = respawnTime;
     }
 }
