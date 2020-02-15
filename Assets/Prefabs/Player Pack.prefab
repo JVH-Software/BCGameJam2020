@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1626181540148514478}
   m_Layer: 0
   m_Name: Player Pack
-  m_TagString: Untagged
+  m_TagString: Pack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,7 +102,8 @@ MonoBehaviour:
   speed: 3
   bulletPrefab: {fileID: 5061695325340694261, guid: ee2e273b0274ddd49a6b707329e3094c,
     type: 3}
-  shootSpeed: 20
+  shootSpeedMultiplier: 1
+  healthBar: {fileID: 0}
 --- !u!95 &1626181540148514476
 Animator:
   serializedVersion: 3
