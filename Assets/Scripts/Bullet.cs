@@ -6,10 +6,12 @@ public class Bullet : MonoBehaviour
 {
 
     public float damage = 1f;
+    public float knockbackStrength = 5f;
+    public float speed = 20f;
 
     Rigidbody2D rbody;
     Vector2 movementVector;
-    GameObject shooter;
+    Pack shooter;
 
     // Start is called before the first frame update
     void Start()
@@ -25,10 +27,10 @@ public class Bullet : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime);
+        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed * shooter.shootSpeedMultiplier);
     }
 
-    public void Shoot(Vector2 movementVector, GameObject shooter)
+    public void Shoot(Vector2 movementVector, Pack shooter)
     {
         this.movementVector = movementVector;
         this.shooter = shooter;
@@ -43,7 +45,7 @@ public class Bullet : MonoBehaviour
         }
         else if(coll.gameObject.tag.Equals("Pack"))
         {
-            coll.gameObject.GetComponent<Pack>().Hit(damage);
+            coll.gameObject.GetComponent<Pack>().Hit(damage, movementVector * knockbackStrength);
             Destroy(gameObject);
         }
     }
