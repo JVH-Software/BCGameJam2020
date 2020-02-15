@@ -31,7 +31,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void Shoot(Vector3 target, Pack shooter)
+    public void Shoot(Vector3 target, Pack pack, PackMember shooter)
     {
         if (fireDelay == 0)
         {
@@ -51,7 +51,7 @@ public class Gun : MonoBehaviour
 
             // Create and shoot bullet
             GameObject bullet = Instantiate(projectile, transform.position, rotation);
-            bullet.GetComponent<Bullet>().Shoot(direction, shooter, this);
+            bullet.GetComponent<Bullet>().Shoot(direction, pack, shooter, this);
             shooter.Knockback(direction * -recoil);
         }
     }

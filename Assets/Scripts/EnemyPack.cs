@@ -5,7 +5,7 @@ using System.Linq;
 using System;
 using UnityEngine.Tilemaps;
 
-public class EnemyPack : Pack
+public class EnemyPack : PackMember
 {
 
     public Transform movementTarget;
@@ -95,7 +95,7 @@ public class EnemyPack : Pack
         // If attack target is in attack range
         if (Mathf.Abs(Vector2.Distance(transform.position,attackTarget.transform.position)) <= attackRange)
         {
-            Shoot(attackTarget.transform.position);
+            Shoot(attackTarget.transform.position, pack);
         }
     }
     void Move(Vector2 pos) {

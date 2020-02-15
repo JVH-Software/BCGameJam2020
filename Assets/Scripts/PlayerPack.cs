@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPack : Pack
+public class PlayerPack : PackMember
 {
     new void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerPack : Pack
         // Shoot
         if (Input.GetMouseButtonDown(0))
         {
-            Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            pack.Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
 }
