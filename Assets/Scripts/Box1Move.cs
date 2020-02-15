@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfMove : MonoBehaviour
+public class Box1Move : MonoBehaviour
 {
 	// Speed for box movement
 	public float speed = 1.5f;

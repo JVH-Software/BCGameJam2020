@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move2Script : MonoBehaviour
+public class Box2Move : MonoBehaviour
 {
 	// Speed for box movement
 	public float speed = 1.5f;
