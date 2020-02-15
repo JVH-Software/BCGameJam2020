@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float damage = 1f;
     public float knockbackStrength = 5f;
     public float speed = 20f;
+    public int timeToDespawn = 1000;
 
     Rigidbody2D rbody;
     Vector2 movementVector;
@@ -22,7 +23,11 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        timeToDespawn -= 1;
+        if(timeToDespawn <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void FixedUpdate()
