@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 
 public class Pack : MonoBehaviour
 {
-
+    internal GameObject target;
     public float speedMultiplier = 1f;
     public float projectileSpeedMultiplier = 1f;
     public float damageMultiplier = 1f;
@@ -25,7 +25,6 @@ public class Pack : MonoBehaviour
     public UpgradeList upgrades;
     private Pack attackTarget;
     public SimpleHealthBar healthBar;
-
     internal GameManager gameManager;
 
 
@@ -60,7 +59,7 @@ public class Pack : MonoBehaviour
         TargetNearestPack();
 
         // Target pack leader
-        GameObject target = attackTarget.packLeader.gameObject;
+        target = attackTarget.packLeader.gameObject;
 
         // Get into range
         if (target != null) {

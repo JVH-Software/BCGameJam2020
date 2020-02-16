@@ -35,6 +35,7 @@ public class PackMember : MonoBehaviour
     {
         if (Mathf.Abs(Vector2.Distance(this.transform.position, _staticTarget)) > 0.6) {
             PerformMovement();
+            
         }
     }
 
@@ -46,6 +47,17 @@ public class PackMember : MonoBehaviour
     public void Update()
     {
         Move(_staticTarget);
+        Vector3 direction;
+        if (gameObject.tag == "Player")
+            direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+        else
+            direction = (pack.target.transform.position - transform.position);
+        direction.z = 0;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //angle - 90 accounts for sprite rotation
+        this.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+ 
     }
 
 
@@ -54,20 +66,15 @@ public class PackMember : MonoBehaviour
 
         if (dead)
             return;
-
-        /* Sample code for future animation
     
         if (movementVector != Vector2.zero)
         {
-            anim.SetBool("Iswalking", true);
-            anim.SetFloat("Input_x", movementVector.x);
-            anim.SetFloat("Input_y", movementVector.y);
+            anim.SetBool("IsWalking", true);
         }
         else
         {
-            anim.SetBool("Iswalking", false);
+            anim.SetBool("IsWalking", false);
         }
-        */
 
         rbody.velocity = (rbody.velocity + movementVector * Time.deltaTime * speed * pack.speedMultiplier);
     }
