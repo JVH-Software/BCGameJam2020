@@ -9,6 +9,7 @@ using UnityEngine.Tilemaps;
 public class Pathfinding : MonoBehaviour
 {
 
+    public static int maxSearchIter = 100;
 
     /// <summary>
     /// Looks for a path
@@ -27,8 +28,13 @@ public class Pathfinding : MonoBehaviour
 
         openSet.Add(startNode);
 
+        int i = 0;
         while (openSet.Count > 0)
         {
+            if (i >= maxSearchIter)
+                break;
+            i++;
+            
             Node currentNode = openSet[0];
 
             openSet.Remove(currentNode);
