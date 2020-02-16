@@ -74,7 +74,6 @@ public class ControlNodeObject : MonoBehaviour
 
                 case State.Contested:
                     capturingTeam = Team.NoTeam;
-
                     break;
                 default:
                     break;
