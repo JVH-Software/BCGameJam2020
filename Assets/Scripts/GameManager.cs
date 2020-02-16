@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject packsContainer;
     internal Pack[] packs;
     public Tilemap ground;
+    public UIOverlay healthbar;
 
     // Level Generation
     public int seed = 0;
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
         {
             pack = Instantiate(playerPackPrefab, packsContainer.transform);
             pack.transform.position = pos;
+            pack.GetComponent<PlayerPack>().overlay = healthbar;
         }
         else
         {
