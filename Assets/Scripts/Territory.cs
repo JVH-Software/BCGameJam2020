@@ -7,7 +7,6 @@ public class Territory : MonoBehaviour
 
     public void SetTerritoryColor(Color color)
     {
-        Debug.Log(color);
         for (int i = 0; i < transform.childCount; i++) {
             SpriteRenderer renderer = transform.GetChild(i).GetComponent<SpriteRenderer>();
             color.a = 0.2f;
