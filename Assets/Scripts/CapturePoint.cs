@@ -9,19 +9,12 @@ public class CapturePoint : MonoBehaviour
     public float ownership = 1;
     public float captureRate = 0.01f;
 
-    private List<Collider> packs = new List<Collider>();
+    private List<Collider2D> packs = new List<Collider2D>();
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         List<string> tags = new List<string>();
-        foreach (Collider pack in packs)
+        foreach (Collider2D pack in packs)
         {
             if(!tags.Contains(pack.tag))
             {
@@ -34,7 +27,7 @@ public class CapturePoint : MonoBehaviour
             if(attacker != owner)
             {
                 ownership -= captureRate;
-                if(captureRate < 0)
+                if(ownership < 0)
                 {
                     owner = attacker;
                     ownership *= -1;
@@ -51,15 +44,17 @@ public class CapturePoint : MonoBehaviour
         }
     }
 
-    private void OnTrigger2DEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log(other.tag);
         if (!packs.Contains(other) && (other.tag.Equals("Player") || other.tag.Equals("Wolf"))) {
             packs.Add(other);
         }
     }
 
-    private void OnTrigger2DExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
+        Debug.Log(other.tag);
         if (packs.Contains(other))
         {
             packs.Remove(other);
