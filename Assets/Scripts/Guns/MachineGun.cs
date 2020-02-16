@@ -16,7 +16,7 @@ public class MachineGun : Gun
     public new float spread = 0.05f;
     private int burstStatus = 9;
 
-    public override void Shoot(Vector3 target, Pack shooter) {
+    public override void Shoot(Vector3 target, PackMember shooter) {
         if (fireDelay == 0) {
             // Compute bullet movement vector
             Vector3 direction = (target - transform.position);
@@ -42,7 +42,7 @@ public class MachineGun : Gun
 
             // Create and shoot bullet
             GameObject bullet = Instantiate(projectile, transform.position, rotation);
-            bullet.GetComponent<Bullet>().Shoot(direction, shooter, this);
+            bullet.GetComponent<Bullet>().Shoot(direction, shooter.pack, shooter, this);
             shooter.Knockback(direction * -recoil);
         }
     }
