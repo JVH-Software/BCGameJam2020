@@ -5,16 +5,15 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-    public float damage = 1f;
-    public float knockbackStrength = 5f;
-    public float speed = 20f;
     public int timeToDespawn = 1000;
     public GameObject particleHit;
     public GameObject particleShoot;
 
     Rigidbody2D rbody;
     Vector2 movementVector;
-    Pack shooter;
+    PackMember shooter;
+    Gun gun;
+    Pack pack;
 
     // Start is called before the first frame update
     void Start()
@@ -34,29 +33,36 @@ public class Bullet : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * speed * shooter.shootSpeedMultiplier);
+        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * gun.projectileSpeed * pack.projectileSpeedMultiplier);
     }
 
-    public void Shoot(Vector2 movementVector, Pack shooter)
+    public void Shoot(Vector2 movementVector, Pack pack, PackMember shooter, Gun gun)
     {
         Instantiate(particleShoot, transform.position, transform.rotation);
         this.movementVector = movementVector;
         this.shooter = shooter;
+        this.gun = gun;
+        this.pack = pack;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        PackMember pm;
         if(coll.gameObject.tag.Equals("UpperBarriers"))
         {
             Instantiate(particleHit, transform.position, transform.rotation);
             Destroy(gameObject);
         }
-        else if(coll.gameObject.tag.Equals("Pack"))
+        else if(coll.gameObject.TryGetComponent<PackMember>(out pm))
         {
-            Instantiate(particleHit, transform.position, transform.rotation);
-            coll.gameObject.GetComponent<Pack>().Hit(damage, movementVector * knockbackStrength);
-            Destroy(gameObject);
+            // No friendly fire (for now)
+            if (!coll.tag.Equals(shooter.tag))
+            {
+                Instantiate(particleHit, transform.position, transform.rotation);
+                coll.gameObject.GetComponent<PackMember>().Hit(gun.damage, movementVector * gun.knockbackStrength);
+                Destroy(gameObject);
+            }
         }
     }
 }
