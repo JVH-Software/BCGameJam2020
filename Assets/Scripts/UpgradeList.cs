@@ -27,7 +27,7 @@ public class UpgradeList : List<Upgrades>
                 pack.damageMultiplier *= 2;
                 break;
             case Upgrades.DefenceBoost:
-                pack.defenceMultiplier *= 1/2;
+                pack.defenceMultiplier /= 2;
                 break;
             case Upgrades.ExtraKnockback:
                 pack.knockbackMultiplier *= 2;
@@ -39,13 +39,15 @@ public class UpgradeList : List<Upgrades>
     {
         base.Remove(upgrade);
 
+        Debug.Log("Twice?");
+
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speedMultiplier *= 1/2;
+                pack.speedMultiplier /= 2;
                 break;
             case Upgrades.FasterShot:
-                pack.projectileSpeedMultiplier *= 1/2;
+                pack.projectileSpeedMultiplier /= 2;
                 break;
             case Upgrades.DamageBoost:
                 pack.damageMultiplier *= 1/2;
@@ -54,7 +56,7 @@ public class UpgradeList : List<Upgrades>
                 pack.defenceMultiplier *= 2;
                 break;
             case Upgrades.ExtraKnockback:
-                pack.knockbackMultiplier *= 1/2;
+                pack.knockbackMultiplier /= 2;
                 break;
         }
     }
