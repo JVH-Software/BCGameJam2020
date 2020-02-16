@@ -8,12 +8,14 @@ using UnityEngine.Tilemaps;
 
 public class Pack : MonoBehaviour
 {
-
+    internal GameObject target;
     public float speedMultiplier = 1f;
     public float projectileSpeedMultiplier = 1f;
     public float damageMultiplier = 1f;
     public float defenceMultiplier = 1f;
     public float knockbackMultiplier = 1f;
+    public float fireRateMultiplier = 1f;
+
     public Transform respawnPoint;
     private List<PackMember> packMembers = new List<PackMember>();
     internal PackMember packLeader;
@@ -22,10 +24,9 @@ public class Pack : MonoBehaviour
     public float health = 50f;
     public float maxHealth = 50f;
 
-    public UpgradeList upgrades;
+    internal UpgradeList upgrades;
     private Pack attackTarget;
-    public SimpleHealthBar healthBar;
-
+    public UIOverlay overlay;
     internal GameManager gameManager;
 
 
@@ -34,11 +35,15 @@ public class Pack : MonoBehaviour
     // 0 = circle, 1 = box, 2 = shuffle
     public int formation = 0;
 
+    public void Awake()
+    {
+        upgrades = new UpgradeList(this);
+    }
+
     public void Start() {
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-        upgrades = new UpgradeList(this);
         for(int i = 0; i < transform.childCount; i++)
         {
             packMembers.Add(transform.GetChild(i).GetComponent<PackMember>());
@@ -60,7 +65,7 @@ public class Pack : MonoBehaviour
         TargetNearestPack();
 
         // Target pack leader
-        GameObject target = attackTarget.packLeader.gameObject;
+        target = attackTarget.packLeader.gameObject;
 
         // Get into range
         if (target != null) {
@@ -112,7 +117,6 @@ public class Pack : MonoBehaviour
     }
 
     private string _lastLeaderPos = null;
-
 
     private void CircleFormation(bool force=false) {
         
@@ -167,13 +171,17 @@ public class Pack : MonoBehaviour
         }
     }
 
-    protected void Death() {
+    protected virtual void Death() {
         foreach (PackMember packMember in packMembers) {
             packMember.MemberDeath();
         }
     }
 
     public void ModifyHealth(float amount, PackMember lastHit = null) {
+        if(amount < 0 && upgrades.Contains(Upgrades.DefenceBoost))
+        {
+            amount /= 2;
+        }
         health += amount;
 
         var deathUnit = maxHealth / packMembers.Count;
@@ -219,10 +227,7 @@ public class Pack : MonoBehaviour
                 counter++;
             }
         }
-        
-        if (healthBar != null) {
-            healthBar.UpdateBar(health, maxHealth);
-        }
 
+        overlay?.UpdateHealthBar(health, maxHealth);
     }
 }

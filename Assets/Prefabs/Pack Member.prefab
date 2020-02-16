@@ -75,7 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: -1253886421
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d7b31d46313d4f64093b8fe16fb81110, type: 3}
+  m_Sprite: {fileID: -7345708824583921685, guid: d9384e4ddbcb83d4b86c0281530ed2aa,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,11 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c71d5146b6208a44978ccc571838797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  maxHealth: 10
   speed: 8
-  healthBar: {fileID: 0}
-  pack: {fileID: 0}
   agroRange: 5
   dead: 0
   _staticTarget: {x: 0, y: 0}
@@ -136,7 +133,7 @@ Animator:
   m_GameObject: {fileID: 561824486460084831}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c5fa72a4292172b45842d0381d22d90a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
