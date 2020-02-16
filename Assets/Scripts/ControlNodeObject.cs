@@ -65,15 +65,16 @@ public class ControlNodeObject : MonoBehaviour
                 case State.Captured:
                     owner = team;
                     capturingTeam = Team.NoTeam;
+                    percentageOfCapture = 0;
                     break;
 
                 case State.Capturing:
                     capturingTeam = team;
-                    percentageOfCapture = 0;
                     break;
 
                 case State.Contested:
                     capturingTeam = Team.NoTeam;
+
                     break;
                 default:
                     break;
