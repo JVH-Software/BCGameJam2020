@@ -46,10 +46,17 @@ public class PackMember : MonoBehaviour
     
     public void Update()
     {
+        if (dead)
+            return;
+
+
+
         Move(_staticTarget);
         Vector3 direction;
         if (gameObject.tag == "Player")
             direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+        else if (pack.target == null)
+            return;
         else
             direction = (pack.target.transform.position - transform.position);
         direction.z = 0;
