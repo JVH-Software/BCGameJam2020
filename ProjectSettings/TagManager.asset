@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UpperBarriers
   - AlphaPack
+  - CapturePoint
   layers:
   - Default
   - TransparentFX

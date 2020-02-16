@@ -23,9 +23,11 @@ public class Pack : MonoBehaviour
     public float maxHealth = 50f;
 
     internal UpgradeList upgrades;
-    public Pack attackTarget;
+    private Pack attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
     public SimpleHealthBar healthBar;
+
+    private GameManager gameManager;
 
 
     public float formationSpread = 1.5f;
@@ -34,6 +36,9 @@ public class Pack : MonoBehaviour
     public int formation = 0;
 
     public void Start() {
+
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
         upgrades = new UpgradeList(this);
         for(int i = 0; i < transform.childCount; i++)
         {
@@ -49,15 +54,36 @@ public class Pack : MonoBehaviour
 
     private void Update() {
 
+        // Get closest pack
+        TargetNearestPack();
+
+        // Target pack leader
         GameObject target = attackTarget.packLeader.gameObject;
 
-        // Priority 1: If player is in agro range
+        // Get into range
         if (target != null) {
             Move(target.transform.position);
         }
-
+        // Attack when in range
         if (target != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, target.transform.position)) <= attackRange) {
             Shoot(target.transform.position);
+        }
+    }
+
+    private void TargetNearestPack()
+    {
+        float dist = -1;
+        for (int i = 0; i < gameManager.packs.Length; i++)
+        {
+            if (!gameManager.packs[i].tag.Equals(this.tag))
+            {
+                float tempDist = Mathf.Abs(Vector2.Distance(gameManager.packs[i].packLeader.transform.position, transform.position));
+                if (tempDist < dist || dist == -1)
+                {
+                    dist = tempDist;
+                    attackTarget = gameManager.packs[i];
+                }
+            }
         }
     }
 
