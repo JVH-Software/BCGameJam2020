@@ -36,11 +36,15 @@ public class Pack : MonoBehaviour
     // 0 = circle, 1 = box, 2 = shuffle
     public int formation = 0;
 
+    public void Awake()
+    {
+        upgrades = new UpgradeList(this);
+    }
+
     public void Start() {
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-        upgrades = new UpgradeList(this);
         for(int i = 0; i < transform.childCount; i++)
         {
             packMembers.Add(transform.GetChild(i).GetComponent<PackMember>());
