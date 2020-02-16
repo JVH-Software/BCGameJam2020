@@ -26,7 +26,7 @@ public class Pack : MonoBehaviour
 
     public UpgradeList upgrades;
     private Pack attackTarget;
-    public SimpleHealthBar healthBar;
+    public UIOverlay overlay;
     internal GameManager gameManager;
 
 
@@ -227,10 +227,7 @@ public class Pack : MonoBehaviour
                 counter++;
             }
         }
-        
-        if (healthBar != null) {
-            healthBar.UpdateBar(health, maxHealth);
-        }
 
+        overlay?.UpdateHealthBar(health, maxHealth);
     }
 }
