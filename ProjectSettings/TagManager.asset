@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pack
   - UpperBarriers
+  - Enemy
   - Wolf
   - Bear
   layers:
