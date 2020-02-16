@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public int timeToDespawn = 1000;
     public GameObject particleHit;
     public GameObject particleShoot;
+    public AudioClip bloodHit;
 
     Rigidbody2D rbody;
     Vector2 movementVector;
@@ -53,7 +54,10 @@ public class Bullet : MonoBehaviour
         }
         else if(coll.gameObject.tag.Equals("Pack"))
         {
-            Instantiate(particleHit, transform.position, transform.rotation);
+            GameObject particles = Instantiate(particleHit, transform.position, transform.rotation);
+            particles.GetComponent<AudioSource>().clip = bloodHit;
+            particles.GetComponent<AudioSource>().Play();
+            particles.GetComponent<ParticleSystem>().startColor = Color.red;
             coll.gameObject.GetComponent<Pack>().Hit(gun.damage, movementVector * gun.knockbackStrength);
             Destroy(gameObject);
         }
