@@ -32,9 +32,9 @@ public class CapturePoint : MonoBehaviour
                 if(ownership < 0)
                 {
                     // Ownership lost
-                    GameObject.FindGameObjectWithTag(owner).GetComponent<Pack>().upgrades.Remove(upgrade);
+                    GameObject.FindGameObjectWithTag(owner).GetComponent<PackMember>().pack.upgrades.Remove(upgrade);
                     territory.SetTerritoryColor(Color.white);
-                    owner = null;
+                    owner = "";
                     ownership *= -1;
                 }
             }
@@ -48,7 +48,7 @@ public class CapturePoint : MonoBehaviour
                         // Ownership won
                         owner = attacker;
                         territory.SetTerritoryColor(Teams.teams[attacker]);
-                        GameObject.FindGameObjectWithTag(owner).GetComponent<Pack>().upgrades.Add(upgrade);
+                        GameObject.FindGameObjectWithTag(owner).GetComponent<PackMember>().pack.upgrades.Add(upgrade);
                     }
                     ownership = 1;
                 }
