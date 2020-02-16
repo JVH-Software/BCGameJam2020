@@ -2,28 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPack : PackMember
+public class PlayerPack : Pack
 {
-    new void Start()
+
+    // Update is called once per frame
+    void Update()
     {
-        base.Start();
-    }
+        MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-    new void Update()
-    {
-        // Movement
-        movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        // Shoot
-        if (Input.GetMouseButtonDown(0))
-        {
-            pack.Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        }
-
-        if (health <= 0)
-        {
-            pack.Respawn();
+        if (Input.GetMouseButton(0)) {
+            Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
     }
-
 }
