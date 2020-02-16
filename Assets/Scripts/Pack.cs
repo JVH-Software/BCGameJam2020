@@ -180,7 +180,7 @@ public class Pack : MonoBehaviour
         }
     }
 
-    protected void Death() {
+    protected virtual void Death() {
         foreach (PackMember packMember in packMembers) {
             packMember.MemberDeath();
         }

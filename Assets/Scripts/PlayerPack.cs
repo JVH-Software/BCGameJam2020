@@ -35,7 +35,14 @@ public class PlayerPack : Pack
 
     }
 
-    protected new void Death() {
+    protected override void Death() {
+        Fade fadeCanvas = GameObject.FindObjectOfType<Fade>();
+        fadeCanvas.FadeOut();
+        StartCoroutine(SwitchScenes());
+    }
+
+    IEnumerator SwitchScenes() {
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene("GameOver");
     }
 }
