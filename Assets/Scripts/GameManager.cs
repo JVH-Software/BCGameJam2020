@@ -4,59 +4,32 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance { get { return instance; } }
 
-    public enum States {intro, main, paused};
-    private const string CONTROL_POINT_TAG = "control point";
-    public GameObject[] controlPoints;
-    public List<ControlNodeObject> ControlNodeObjects = new List<ControlNodeObject>();
-  
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this.gameObject);
-        } else {
-            instance = this;
-        }
-    }
+    CapturePoint[] capturePoints;
+    public float winningPercent = 0.5f;
 
     private void Start()
     {
-        controlPoints = GameObject.FindGameObjectsWithTag(CONTROL_POINT_TAG);
-
-        foreach (GameObject point in controlPoints)
+        // GetComponents should always be tried to be called in Start rather than Update
+        GameObject[] capturePointObjs = GameObject.FindGameObjectsWithTag("capturepoint");
+        capturePoints = new CapturePoint[capturePointObjs.Length];
+        for(int i = 0; i < capturePoints.Length; i++)
         {
-            ControlNodeObject node = point.GetComponent<ControlNodeObject>();
-            ControlNodeObjects.Add(node);
+            capturePoints[i] = capturePointObjs[i].GetComponent<CapturePoint>();
         }
     }
 
-
-    void Update()
+    private void Update()
     {
-        
-    }
-
-    private void OnDestroy()
-    {
-        if (this == instance)
+        int controlled = 0;
+        for (int i = 0; i < capturePoints.Length; i++)
         {
-            instance = null;
+            if (capturePoints[i].owner.Equals("Player"))
+                controlled++;
+        }
+        if(((float)controlled)/capturePoints.Length >= winningPercent)
+        {
+            Debug.Log("Player Wins!");
         }
     }
-
-    
-    public ControlNodeObject getNode(int index)
-    {
-        //return nodeList[index];
-        return null;
-    }
-
-
-
-
-
-
 }

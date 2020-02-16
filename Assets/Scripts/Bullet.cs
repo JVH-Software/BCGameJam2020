@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public int timeToDespawn = 1000;
     public GameObject particleHit;
     public GameObject particleShoot;
+    public AudioClip bloodHit;
 
     Rigidbody2D rbody;
     Vector2 movementVector;
@@ -56,6 +57,11 @@ public class Bullet : MonoBehaviour
         }
         else if(coll.gameObject.TryGetComponent<PackMember>(out pm))
         {
+            GameObject particles = Instantiate(particleHit, transform.position, transform.rotation);
+            particles.GetComponent<AudioSource>().clip = bloodHit;
+            particles.GetComponent<AudioSource>().Play();
+            particles.GetComponent<ParticleSystem>().startColor = Color.red;
+
             // No friendly fire (for now)
             if (!coll.tag.Equals(shooter.tag))
             {
