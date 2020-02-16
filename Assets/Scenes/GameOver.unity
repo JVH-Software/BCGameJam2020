@@ -809,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14e459bf0eb2fd4fb09a07ca2d40243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneOne: SampleScene
+  sceneOne: CityLevel
 --- !u!224 &350863980
 RectTransform:
   m_ObjectHideFlags: 0
