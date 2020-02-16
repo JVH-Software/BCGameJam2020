@@ -121,6 +121,18 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &281096363 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4715075852956067061, guid: dfc0e806426f57b4184a6dfc59f7012b,
+    type: 3}
+  m_PrefabInstance: {fileID: 921803454}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085e92a64f62a484fbbe90d04e12f654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &328159047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3716,6 +3728,11 @@ PrefabInstance:
       propertyPath: tilemap
       value: 
       objectReference: {fileID: 1746176230}
+    - target: {fileID: 4715075852040691938, guid: dfc0e806426f57b4184a6dfc59f7012b,
+        type: 3}
+      propertyPath: attackTarget
+      value: 
+      objectReference: {fileID: 281096363}
     - target: {fileID: 4715075852956067061, guid: dfc0e806426f57b4184a6dfc59f7012b,
         type: 3}
       propertyPath: tilemap
