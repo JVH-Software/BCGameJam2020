@@ -43,13 +43,6 @@ public class GameManager : MonoBehaviour
 
         GenerateLevel(gd.level);
 
-        /*// Find packs
-        packs = new Pack[packsContainer.transform.childCount];
-        for (int i = 0; i < packsContainer.transform.childCount; i++)
-        {
-            packs[i] = packsContainer.transform.GetChild(i).GetComponent<Pack>();
-        }*/
-
     }
 
     private void Update()

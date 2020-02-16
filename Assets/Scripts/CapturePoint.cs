@@ -17,22 +17,11 @@ public class CapturePoint : MonoBehaviour
     private void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-
-        /*
-        if (owner == null)
-        {
-            RemoveOwnership();
-        }
-        else
-        {
-            SetOwnership(owner);
-        }*/
     }
 
     public void SetOwnership(string newOwner)
     {
 
-        Debug.Log(newOwner + " just captured a control point!");
         territory.SetTerritoryColor(Teams.teams[newOwner]);
         foreach (Pack p in gameManager.packs)
         {
@@ -52,7 +41,6 @@ public class CapturePoint : MonoBehaviour
         }
         else
         {
-            Debug.Log(owner + " just lost a control point!");
             foreach(Pack p in gameManager.packs)
             {
                 if(p.tag.Equals(owner))
