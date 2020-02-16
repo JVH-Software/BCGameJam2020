@@ -39,41 +39,36 @@ public class ControlNodeObject : MonoBehaviour
         }
     }
 
-    // For trigger implementation, the incoming gameobject must have a 
-
-    //Enter sets contesting state
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        string tag = collider.gameObject.tag;
+        string tag = collision.gameObject.tag;
         if (isEntity(tag))
         {
             ControlNode.Team enteringTeam = convertTagToTeam(tag);
-            node.Enter(enteringTeam);
+            node.onEnter(enteringTeam);
         }
     }
 
-    
     private void OnTriggerStay2D(Collider2D collider)
     {
         string tag = collider.gameObject.tag;
         if (isEntity(tag))
         {
             ControlNode.Team stayingTeam = convertTagToTeam(tag);
-            node.Stay(stayingTeam);
+            node.onStay(stayingTeam);
         }
-    } 
+    }
 
-    //handles when a previous team leaves and when there is no one on tag
     private void OnTriggerExit2D(Collider2D collision)
     {
         string tag = collision.gameObject.tag;
         if (isEntity(tag))
         {
-            ControlNode.Team leavingTeam = convertTagToTeam(tag);
-            node.Leave(leavingTeam);
+            ControlNode.Team exitingTeam = convertTagToTeam(tag);
+            node.onLeave(exitingTeam);
         }
-
     }
+
     private void Update()
     {
         node.debugDisplay();

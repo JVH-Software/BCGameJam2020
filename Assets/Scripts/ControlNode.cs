@@ -12,7 +12,7 @@ public class ControlNode
     private Team owner;
     private Team capturingTeam;
     private State status;
-    private List<Team> challengers;
+    private List<Team> occupants;
 
 
     public ControlNode()
@@ -21,7 +21,7 @@ public class ControlNode
         owner = Team.NoTeam;
         capturingTeam = Team.NoTeam;
         status = State.Empty;
-        challengers = new List<Team>();
+        occupants = new List<Team>();
     }
 
     // Setters and getters for team
@@ -60,10 +60,9 @@ public class ControlNode
                 capturingTeam = team;
                 percentageOfCapture = 0;
                 break;
-            //adds team to challengers
+            //adds team to occupants
             case State.Contested:
                 capturingTeam = Team.NoTeam;
-                challengers.Add(team);
                 break;
             default:
                 break;
@@ -77,83 +76,54 @@ public class ControlNode
         owner = Team.NoTeam;
         status = State.Empty;
         capturingTeam = Team.NoTeam;
-        challengers.Clear();
+        occupants.Clear();
     }
 
     public bool isEmptyState()
     {
-        return (percentageOfCapture == 0 && owner == Team.NoTeam && status == State.Empty && capturingTeam == Team.NoTeam && challengers.Count == 0);
+        return (percentageOfCapture == 0 && owner == Team.NoTeam && status == State.Empty && capturingTeam == Team.NoTeam && occupants.Count == 0);
     }
 
-
-    public void Enter(Team challenger)
+    public bool hasNotCapturedNode(Team team)
     {
-        if(challenger != owner)
+        return (getState() != State.Capturing && getOwner() != team);
+    }
+    public void onEnter(Team team)
+    {
+        if (!occupants.Contains(team))
         {
-            //#1. if node is uncontested, let the entering team take the node, regardless of the owner
-            if (status != State.Contested)
-            {
-                setState(State.Capturing, challenger);
-            }
-            //#2. if a challenging team comes in, let the owner and the challenger contest
-            else if (!challengers.Contains(challenger))
-            {
-                setState(State.Contested, challenger);
-            }
+            occupants.Add(team);
+        }
+        if (occupants.Count > 1)
+        {
+            setState(State.Contested, team);
+        }
+    }
+    public void onStay(Team team)
+    {
+        if (occupants.Count > 1)
+        {
+            setState(State.Contested, team);
+        }
+        else if (occupants.Count == 1 && hasNotCapturedNode(team))
+        {
+            setState(State.Capturing, occupants.ToArray()[0]);
         }
         
     }
 
-    public void Stay(Team stayingTeam)
+    public void onLeave(Team team)
     {
-        if(stayingTeam != owner)
+        occupants.Remove(team);
+        if (occupants.Count == 1)
         {
-            //#1. runs the capture state for the staying team incase it hasn't
-            if(status != State.Capturing && status != State.Contested)
-            {
-                setState(State.Capturing, stayingTeam);
-            }
-            
+            setState(State.Capturing, occupants.ToArray()[0]);
         }
-    }
-
-    public void Leave(Team leavingTeam)
-    {
-        //#1. assumes if one of the challengers are gone
-        if (challengers.Contains(leavingTeam))
-        {
-            challengers.Remove(leavingTeam);
-
-            //if no challengers, owner keeps node
-            if(challengers.Count == 0)
-            {
-                setState(State.Captured, owner);
-            }
-        }
-        
-        //#2. if owner has left, let the challengers take over
-        else if(leavingTeam == owner)
-        {
-            
-            //if single challenger, let challenger capture
-            if (challengers.Count == 1)
-            {
-                setState(State.Capturing, challengers.ToArray()[0]);
-            }
-            //if multiple challengers, set state to contested
-            else
-            {
-                foreach (Team team in challengers)
-                {
-                    setState(State.Contested, team);
-                }
-            }
-        }
-        //#3. if a team fails to capture with 100%, reset to empty
-        else
+        else if (occupants.Count == 0 && getState() != State.Captured)
         {
             setStateEmpty();
         }
+        
     }
 
     public void Capture(double increment)
