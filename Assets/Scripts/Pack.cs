@@ -16,7 +16,6 @@ public class Pack : MonoBehaviour
     protected UpgradeList upgrades;
     public GameObject attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
-
     public float formationSpread = 1.5f;
 
     // 0 = circle, 1 = box, 2 = shuffle
