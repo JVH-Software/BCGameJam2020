@@ -23,7 +23,7 @@ public class Pack : MonoBehaviour
     public float maxHealth = 50f;
 
     internal UpgradeList upgrades;
-    public GameObject attackTarget;
+    public Pack attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
     public SimpleHealthBar healthBar;
 
@@ -45,13 +45,15 @@ public class Pack : MonoBehaviour
 
     private void Update() {
 
+        GameObject target = attackTarget.packLeader.gameObject;
+
         // Priority 1: If player is in agro range
-        if (attackTarget != null) {
-            Move(attackTarget.transform.position);
+        if (target != null) {
+            Move(target.transform.position);
         }
 
-        if (attackTarget != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, attackTarget.transform.position)) <= attackRange) {
-            Shoot(attackTarget.transform.position);
+        if (target != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, target.transform.position)) <= attackRange) {
+            Shoot(target.transform.position);
         }
     }
 
@@ -177,7 +179,9 @@ public class Pack : MonoBehaviour
             while (counter < packMembers.Count) {
                 if (packMembers[counter].dead != true) {
                     packLeader = packMembers[counter];
-                    gameObject.tag.Equals("Player");
+                    if(packLeader.tag.Equals("Player")) {
+                        Camera.main.GetComponent<CameraTracking>().target = packLeader.gameObject;
+                    }
                     break;
                 }
                 counter++;
