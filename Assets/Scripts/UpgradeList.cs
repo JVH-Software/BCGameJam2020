@@ -18,10 +18,16 @@ public class UpgradeList : List<Upgrades>
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speed += 3;
+                pack.speedMultiplier *= 2;
                 break;
             case Upgrades.FasterShot:
                 pack.projectileSpeedMultiplier *= 2;
+                break;
+            case Upgrades.DamageBoost:
+                pack.damageMultiplier *= 2;
+                break;
+            case Upgrades.DefenceBoost:
+                pack.defenceMultiplier *= 1/2;
                 break;
         }
     }
@@ -33,13 +39,19 @@ public class UpgradeList : List<Upgrades>
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speed -= 3;
+                pack.speedMultiplier *= 1/2;
                 break;
             case Upgrades.FasterShot:
                 pack.projectileSpeedMultiplier *= 1/2;
+                break;
+            case Upgrades.DamageBoost:
+                pack.damageMultiplier *= 1/2;
+                break;
+            case Upgrades.DefenceBoost:
+                pack.defenceMultiplier *= 2;
                 break;
         }
     }
 }
 
-public enum Upgrades {SpeedBoost, FasterShot};
+public enum Upgrades {SpeedBoost, FasterShot, DamageBoost, DefenceBoost };
