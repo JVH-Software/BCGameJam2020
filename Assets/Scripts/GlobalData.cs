@@ -6,7 +6,7 @@ public class GlobalData : MonoBehaviour
 {
 
     public int seed = 0;
-    public int level = 1;
+    public int level = 0;
 
     void Start()
     {
