@@ -10,6 +10,7 @@ public class CapturePoint : MonoBehaviour
     public float captureRate = 0.01f;
     public Territory territory;
     public Upgrades upgrade;
+    public string capturerName;
 
     private List<Collider2D> packs = new List<Collider2D>();
     
@@ -23,9 +24,14 @@ public class CapturePoint : MonoBehaviour
                 tags.Add(pack.tag);
             }
         }
+        if(tags.Count == 0)
+        {
+            capturerName = null;
+        }
         if(tags.Count == 1)
         {
             string attacker = tags[0];
+            capturerName = attacker;
             if(owner != null && attacker != owner.tag)
             {
                 ownership -= captureRate;
@@ -57,6 +63,10 @@ public class CapturePoint : MonoBehaviour
             }
         }
     }
+
+    public bool isContested() { return packs.Count >= 2;  }
+    public bool IsBeingCaptured() { return capturerName != null;  }
+    public bool IsOwned() { return owner != null;  }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
