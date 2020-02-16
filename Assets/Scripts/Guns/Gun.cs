@@ -35,22 +35,11 @@ public class Gun : MonoBehaviour
     {
         if (fireDelay == 0)
         {
-            // Compute bullet movement vector
-            Vector3 direction = (target - transform.position);
-            direction.z = 0;
-            direction.Normalize();
-            if (!shooter.pack.upgrades.Contains(Upgrades.PerfectAim))
-            {
-                direction.x = direction.x + Random.Range(-spread, spread);
-                direction.y = direction.y + Random.Range(-spread, spread);
-            }
-
+            Vector3 direction = computeMovementVector(target, shooter);
             // Reset rate of fire delay
             fireDelay = rateOfFire;
 
-            // Compute bullet rotation
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            Quaternion rotation = computeBulletRotation(direction);
 
             // Create and shoot bullet
             GameObject bullet = Instantiate(projectile, transform.position, rotation);
@@ -60,5 +49,28 @@ public class Gun : MonoBehaviour
             if(!shooter.pack.upgrades.Contains(Upgrades.NoRecoil))
                 shooter.Knockback(direction * -recoil);
         }
+    }
+
+    // Splitting calculation functions into methods for inherting classes to use
+    public Vector3 computeMovementVector(Vector3 target, PackMember shooter)
+    {
+        // Compute bullet movement vector
+        Vector3 direction = (target - transform.position);
+        direction.z = 0;
+        direction.Normalize();
+        if (!shooter.pack.upgrades.Contains(Upgrades.PerfectAim))
+        {
+            direction.x = direction.x + Random.Range(-spread, spread);
+            direction.y = direction.y + Random.Range(-spread, spread);
+        }
+        return direction;
+    }
+
+    public Quaternion computeBulletRotation(Vector3 direction)
+    {
+        // Compute bullet rotation
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        return rotation;
     }
 }
