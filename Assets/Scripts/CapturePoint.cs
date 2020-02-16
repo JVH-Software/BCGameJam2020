@@ -15,14 +15,41 @@ public class CapturePoint : MonoBehaviour
 
     private void Start()
     {
+        /*
         if (owner == null)
         {
-            territory.SetTerritoryColor(Color.white);
+            RemoveOwnership();
         }
         else
         {
-            territory.SetTerritoryColor(Teams.teams[owner.tag]);
-            owner.upgrades.Add(upgrade);
+            SetOwnership(owner);
+        }*/
+    }
+
+    public void SetOwnership(Pack newOwner)
+    {
+        RemoveOwnership();
+
+        Debug.Log(newOwner.tag + " just captured a control point!");
+        territory.SetTerritoryColor(Teams.teams[newOwner.tag]);
+        newOwner.upgrades.Add(upgrade);
+        owner = newOwner;
+    }
+
+    public void RemoveOwnership()
+    {
+        territory.SetTerritoryColor(Color.white);
+
+        if (owner == null)
+        {
+            ownership = 0;
+        }
+        else
+        {
+            Debug.Log(owner.tag + " just lost a control point!");
+            owner.upgrades.Remove(upgrade);
+            owner = null;
+            ownership *= -1;
         }
     }
 
@@ -45,11 +72,7 @@ public class CapturePoint : MonoBehaviour
                 if(ownership < 0)
                 {
                     // Ownership lost
-                    Debug.Log(owner.tag + " just lost a control point!");
-                    owner.upgrades.Remove(upgrade);
-                    territory.SetTerritoryColor(Color.white);
-                    owner = null;
-                    ownership *= -1;
+                    RemoveOwnership();
                 }
             }
             else
@@ -60,10 +83,7 @@ public class CapturePoint : MonoBehaviour
                     if(owner == null)
                     {
                         // Ownership won
-                        Debug.Log(packs[0].tag + " just captured a control point!");
-                        owner = packs[0].gameObject.GetComponent<PackMember>().pack;
-                        territory.SetTerritoryColor(Teams.teams[attacker]);
-                        packs[0].gameObject.GetComponent<PackMember>().pack.upgrades.Add(upgrade);
+                        SetOwnership(packs[0].gameObject.GetComponent<PackMember>().pack);
                     }
                     ownership = 1;
                 }

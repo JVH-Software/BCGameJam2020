@@ -73,4 +73,18 @@ public static class Utility
 
         return new Vector2(x + (r * Mathf.Cos(angle)), y + (r * Mathf.Sin(angle)));
     }
+
+
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        int n = list.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n);
+            T value = list[k];
+            list[k] = list[n];
+            list[n] = value;
+        }
+    }
 }
