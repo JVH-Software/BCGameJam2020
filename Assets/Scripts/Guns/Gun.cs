@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     public float recoil = 1f;
     public float spread = 0.2f;
 
-    private int fireDelay = 0;
+    protected int fireDelay = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +31,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void Shoot(Vector3 target, Pack shooter)
+    public virtual void Shoot(Vector3 target, PackMember shooter)
     {
         if (fireDelay == 0)
         {
@@ -51,7 +51,7 @@ public class Gun : MonoBehaviour
 
             // Create and shoot bullet
             GameObject bullet = Instantiate(projectile, transform.position, rotation);
-            bullet.GetComponent<Bullet>().Shoot(direction, shooter, this);
+            bullet.GetComponent<Bullet>().Shoot(direction, shooter.pack, shooter, this);
             shooter.Knockback(direction * -recoil);
         }
     }

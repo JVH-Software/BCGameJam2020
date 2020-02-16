@@ -1,23 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerPack : Pack
 {
-    new void Start()
-    {
-        base.Start();
-    }
 
+    // Update is called once per frame
     void Update()
     {
-        // Movement
-        movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        // Shoot
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButton(0)) {
             Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
+
+        if (Input.GetKey(KeyCode.Escape)) {
+            SceneManager.LoadScene("StartMenu");
+        }
+
+        if (Input.GetKey(KeyCode.Space)) {
+            if (formationSpread != 6f) {
+                
+                formationSpread = 6f;
+                PackMove(true);
+            }            
+        } else if (formationSpread == 6f ) {
+            formationSpread = 1.5f;
+            PackMove(true);
+        }
+
     }
 }
