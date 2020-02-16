@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pack
   - UpperBarriers
+  - AlphaTeam
   layers:
   - Default
   - TransparentFX

@@ -5,9 +5,11 @@ using UnityEngine;
 public class CapturePoint : MonoBehaviour
 {
 
-    public string owner = null;
+    public string owner = "";
     public float ownership = 1;
     public float captureRate = 0.01f;
+    public Territory territory;
+    public Upgrades upgrade;
 
     private List<Collider2D> packs = new List<Collider2D>();
     
@@ -24,20 +26,30 @@ public class CapturePoint : MonoBehaviour
         if(tags.Count == 1)
         {
             string attacker = tags[0];
-            if(attacker != owner)
+            if(attacker != owner && owner != "")
             {
                 ownership -= captureRate;
                 if(ownership < 0)
                 {
-                    owner = attacker;
+                    // Ownership lost
+                    GameObject.FindGameObjectWithTag(owner).GetComponent<Pack>().upgrades.Remove(upgrade);
+                    territory.SetTerritoryColor(Color.white);
+                    owner = null;
                     ownership *= -1;
                 }
             }
             else
             {
                 ownership += captureRate;
-                if(ownership > 1)
+                if(ownership >= 1)
                 {
+                    if(owner == "")
+                    {
+                        // Ownership won
+                        owner = attacker;
+                        territory.SetTerritoryColor(Teams.teams[attacker]);
+                        GameObject.FindGameObjectWithTag(owner).GetComponent<Pack>().upgrades.Add(upgrade);
+                    }
                     ownership = 1;
                 }
             }
@@ -47,7 +59,7 @@ public class CapturePoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.tag);
-        if (!packs.Contains(other) && (other.tag.Equals("Player") || other.tag.Equals("Wolf"))) {
+        if (!packs.Contains(other) && Teams.teams.ContainsKey(other.tag)) {
             packs.Add(other);
         }
     }

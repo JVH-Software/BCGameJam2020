@@ -17,7 +17,7 @@ public class Pack : MonoBehaviour
     private bool dead = false;
     public Gun gun;
 
-    protected UpgradeList upgrades;
+    public UpgradeList upgrades;
 
     Rigidbody2D rbody;
     Animator anim;
