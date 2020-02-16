@@ -11,8 +11,9 @@ public class Bullet : MonoBehaviour
 
     Rigidbody2D rbody;
     Vector2 movementVector;
-    Pack shooter;
+    PackMember shooter;
     Gun gun;
+    Pack pack;
 
     // Start is called before the first frame update
     void Start()
@@ -32,30 +33,36 @@ public class Bullet : MonoBehaviour
 
     public void FixedUpdate()
     {
-        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * gun.projectileSpeed * shooter.projectileSpeedMultiplier);
+        rbody.MovePosition(rbody.position + movementVector * Time.deltaTime * gun.projectileSpeed * pack.projectileSpeedMultiplier);
     }
 
-    public void Shoot(Vector2 movementVector, Pack shooter, Gun gun)
+    public void Shoot(Vector2 movementVector, Pack pack, PackMember shooter, Gun gun)
     {
         Instantiate(particleShoot, transform.position, transform.rotation);
         this.movementVector = movementVector;
         this.shooter = shooter;
         this.gun = gun;
+        this.pack = pack;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), shooter.GetComponent<Collider2D>());
     }
 
     void OnTriggerEnter2D(Collider2D coll)
     {
+        PackMember pm;
         if(coll.gameObject.tag.Equals("UpperBarriers"))
         {
             Instantiate(particleHit, transform.position, transform.rotation);
             Destroy(gameObject);
         }
-        else if(coll.gameObject.tag.Equals("Pack"))
+        else if(coll.gameObject.TryGetComponent<PackMember>(out pm))
         {
-            Instantiate(particleHit, transform.position, transform.rotation);
-            coll.gameObject.GetComponent<Pack>().Hit(gun.damage, movementVector * gun.knockbackStrength);
-            Destroy(gameObject);
+            // No friendly fire (for now)
+            if (!coll.tag.Equals(shooter.tag))
+            {
+                Instantiate(particleHit, transform.position, transform.rotation);
+                coll.gameObject.GetComponent<PackMember>().Hit(gun.damage, movementVector * gun.knockbackStrength);
+                Destroy(gameObject);
+            }
         }
     }
 }
