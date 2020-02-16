@@ -16,7 +16,6 @@ public class Pack : MonoBehaviour
     public float knockbackMultiplier = 1f;
     public float fireRateMultiplier = 1f;
 
-    public Transform respawnPoint;
     private List<PackMember> packMembers = new List<PackMember>();
     internal PackMember packLeader;
     public float attackRange = 5;
@@ -168,6 +167,9 @@ public class Pack : MonoBehaviour
 
     public void Respawn()
     {
+
+        Transform respawnPoint = gameManager.FindRandomOwnedPoint(tag).transform;
+
         health = maxHealth;
         var takenTiles = "";
         foreach (PackMember packMember in packMembers) {

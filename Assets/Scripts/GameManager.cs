@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    CapturePoint FindRandomOwnedPoint(string tag)
+    public CapturePoint FindRandomOwnedPoint(string tag)
     {
         List<CapturePoint> foundPoints = new List<CapturePoint>();
         foreach(CapturePoint cp in capturePoints)
