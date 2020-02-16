@@ -23,7 +23,6 @@ public class CapturePoint : MonoBehaviour
                 tags.Add(pack.tag);
             }
         }
-        Debug.Log(tags.Count);
         if(tags.Count == 1)
         {
             string attacker = tags[0];
