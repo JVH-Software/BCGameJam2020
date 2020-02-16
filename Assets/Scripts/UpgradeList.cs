@@ -29,6 +29,9 @@ public class UpgradeList : List<Upgrades>
             case Upgrades.DefenceBoost:
                 pack.defenceMultiplier *= 1/2;
                 break;
+            case Upgrades.ExtraKnockback:
+                pack.knockbackMultiplier *= 2;
+                break;
         }
     }
 
@@ -50,8 +53,11 @@ public class UpgradeList : List<Upgrades>
             case Upgrades.DefenceBoost:
                 pack.defenceMultiplier *= 2;
                 break;
+            case Upgrades.ExtraKnockback:
+                pack.knockbackMultiplier *= 1/2;
+                break;
         }
     }
 }
 
-public enum Upgrades {SpeedBoost, FasterShot, DamageBoost, DefenceBoost };
+public enum Upgrades {SpeedBoost, FasterShot, DamageBoost, DefenceBoost, PerfectAim, NoRecoil, ExtraKnockback };

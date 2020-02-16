@@ -39,8 +39,11 @@ public class Gun : MonoBehaviour
             Vector3 direction = (target - transform.position);
             direction.z = 0;
             direction.Normalize();
-            direction.x = direction.x + Random.Range(-spread, spread);
-            direction.y = direction.y + Random.Range(-spread, spread);
+            if (!shooter.pack.upgrades.Contains(Upgrades.PerfectAim))
+            {
+                direction.x = direction.x + Random.Range(-spread, spread);
+                direction.y = direction.y + Random.Range(-spread, spread);
+            }
 
             // Reset rate of fire delay
             fireDelay = rateOfFire;
@@ -52,7 +55,10 @@ public class Gun : MonoBehaviour
             // Create and shoot bullet
             GameObject bullet = Instantiate(projectile, transform.position, rotation);
             bullet.GetComponent<Bullet>().Shoot(direction, shooter.pack, shooter, this);
-            shooter.Knockback(direction * -recoil);
+
+            //Recoil
+            if(!shooter.pack.upgrades.Contains(Upgrades.NoRecoil))
+                shooter.Knockback(direction * -recoil);
         }
     }
 }
