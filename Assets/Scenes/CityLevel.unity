@@ -81623,6 +81623,31 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 429674762}
+    - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
+        type: 3}
+      propertyPath: numStartingPackMembers
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
+        type: 3}
+      propertyPath: winningPercent
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
+        type: 3}
+      propertyPath: numEnemyPacks
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
+        type: 3}
+      propertyPath: numEnemyTeams
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
+        type: 3}
+      propertyPath: numPacksPerTeam
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 512205358086454203, guid: ec2171f19e3865544a93d23735748d0c,
         type: 3}
       propertyPath: m_LocalPosition.x
