@@ -13,9 +13,10 @@ public class Pack : MonoBehaviour
     public List<PackMember> packMembers;
     public PackMember packLeader;
     public float attackRange = 5;
-    protected UpgradeList upgrades;
     public GameObject attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
+    public UpgradeList upgrades;
+
     public float formationSpread = 1.5f;
 
     // 0 = circle, 1 = box, 2 = shuffle
@@ -24,7 +25,6 @@ public class Pack : MonoBehaviour
     public void Start() {
         upgrades = new UpgradeList(this);
         if (packLeader == null) packLeader = packMembers[0];
-
         // get initial positions
         PackMove();
     }
