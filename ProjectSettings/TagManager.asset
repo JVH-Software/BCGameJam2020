@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Pack
   - UpperBarriers
-  - Enemy
+  - AlphaPack
   layers:
   - Default
   - TransparentFX
@@ -20,7 +19,7 @@ TagManager:
   - UpperBarriers
   - Packs
   - Bullets
-  - 
+  - Territories
   - 
   - 
   - 

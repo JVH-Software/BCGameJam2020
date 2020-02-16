@@ -5,16 +5,11 @@ using UnityEngine;
 public class Territory : MonoBehaviour
 {
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void SetTerritoryColor(Color color)
     {
-        for (int i = 1; i < transform.childCount; i++) {
+        for (int i = 0; i < transform.childCount; i++) {
             SpriteRenderer renderer = transform.GetChild(i).GetComponent<SpriteRenderer>();
+            color.a = 0.2f;
             renderer.color = color;
         }
     }

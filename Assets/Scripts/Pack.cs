@@ -11,11 +11,14 @@ public class Pack : MonoBehaviour
 
     public float speedMultiplier = 1f;
     public float projectileSpeedMultiplier = 1f;
+    public float damageMultiplier = 1f;
+    public float defenceMultiplier = 1f;
+    public float knockbackMultiplier = 1f;
     public Transform respawnPoint;
     public List<PackMember> packMembers;
     public PackMember packLeader;
     public float attackRange = 5;
-    
+
     public float health = 50f;
     public float maxHealth = 50f;
 
@@ -23,6 +26,7 @@ public class Pack : MonoBehaviour
     public GameObject attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
     public SimpleHealthBar healthBar;
+
 
     public float formationSpread = 1.5f;
 
@@ -32,7 +36,6 @@ public class Pack : MonoBehaviour
     public void Start() {
         upgrades = new UpgradeList(this);
         if (packLeader == null) packLeader = packMembers[0];
-
         // get initial positions
         PackMove();
 
@@ -75,6 +78,7 @@ public class Pack : MonoBehaviour
     }
 
     private string _lastLeaderPos = null;
+
 
     private void CircleFormation(bool force=false) {
         
