@@ -32,6 +32,9 @@ public class UpgradeList : List<Upgrades>
             case Upgrades.ExtraKnockback:
                 pack.knockbackMultiplier *= 2;
                 break;
+            case Upgrades.MachineGun:
+                pack.fireRateMultiplier *= 2;
+                break;
         }
     }
 
@@ -57,8 +60,11 @@ public class UpgradeList : List<Upgrades>
             case Upgrades.ExtraKnockback:
                 pack.knockbackMultiplier /= 2;
                 break;
+            case Upgrades.MachineGun:
+                pack.fireRateMultiplier /= 2;
+                break;
         }
     }
 }
 
-public enum Upgrades {SpeedBoost, FasterShot, DamageBoost, DefenceBoost, PerfectAim, NoRecoil, ExtraKnockback };
+public enum Upgrades {SpeedBoost, FasterShot, DamageBoost, DefenceBoost, PerfectAim, NoRecoil, ExtraKnockback, MachineGun};
