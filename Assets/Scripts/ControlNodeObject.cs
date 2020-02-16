@@ -158,14 +158,6 @@ public class ControlNodeObject : MonoBehaviour
             return (getState() != State.Capturing && getOwner() != team);
         }
 
-        // - Debugging purposes
-        public void debugDisplay()
-        {
-            Debug.Log("Current owner: " + owner);
-            Debug.Log("Current capturing team: " + capturingTeam);
-            Debug.Log("Current status: " + status);
-            Debug.Log("Percentage of capture: " + percentageOfCapture);
-        }
 
     }
 
@@ -174,6 +166,7 @@ public class ControlNodeObject : MonoBehaviour
         renderer = GetComponent<SpriteRenderer>();
         node = new ControlNode();
         StartCoroutine("statusWatcher");
+        GetComponent<CircleCollider2D>().radius = regionRadius;
         
     }
     bool isTeam(string tag)
@@ -224,12 +217,6 @@ public class ControlNodeObject : MonoBehaviour
             node.onLeave(exitingTeam);
         }
     }
-
-    private void Update()
-    {
-        node.debugDisplay();
-    }
-
 
     // A forever while loop coroutine that uses switch statements to check status of the ControlNode
     IEnumerator statusWatcher()
