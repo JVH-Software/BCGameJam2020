@@ -47,11 +47,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    
     public ControlNodeObject getNode(int index)
     {
         //return nodeList[index];
-        return null; 
+        return null;
     }
+
+
+
+
 
 
 }
