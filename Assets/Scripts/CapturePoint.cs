@@ -64,14 +64,14 @@ public class CapturePoint : MonoBehaviour
         }
         if(tags.Count == 0)
         {
-            capturerName = null;
+            capturerName = "";
         }
         if(tags.Count == 1)
         {
             string attacker = tags[0];
             capturerName = attacker;
 
-            if (owner != null && attacker != owner)
+            if (owner != "" && attacker != owner)
 
             {
                 ownership -= captureRate;
@@ -86,7 +86,7 @@ public class CapturePoint : MonoBehaviour
                 ownership += captureRate;
                 if(ownership >= 1)
                 {
-                    if(owner == null)
+                    if(owner == "")
                     {
                         // Ownership won
                         RemoveOwnership();
@@ -99,8 +99,8 @@ public class CapturePoint : MonoBehaviour
     }
 
     public bool isContested() { return packs.Count >= 2;  }
-    public bool IsBeingCaptured() { return capturerName != null;  }
-    public bool IsOwned() { return owner != null;  }
+    public bool IsBeingCaptured() { return capturerName != "";  }
+    public bool IsOwned() { return owner != "";  }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

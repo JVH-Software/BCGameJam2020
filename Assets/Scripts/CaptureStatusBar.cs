@@ -30,7 +30,7 @@ public class CaptureStatusBar : MonoBehaviour
     public Sprite[] foregroundArray;
     private Sprite background;
     private Sprite foreground;
-    private const float BLINK_DURATION = 0.8f;
+    private const float BLINK_DURATION = 0.5f;
     private bool isBlinking = false;
 
     private string previousCapturer;

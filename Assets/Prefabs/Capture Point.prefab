@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f55b1cea44bab64fb5849f969b861fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32fc1a03fe918ee49b59f61f76d66372, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4f55b1cea44bab64fb5849f969b861fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 32fc1a03fe918ee49b59f61f76d66372, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -204,8 +204,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1689058661
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6153090753217782480
 MonoBehaviour:
@@ -311,8 +311,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: ba45af34f876bd549a565589f7dcb9cb, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -340,13 +340,13 @@ MonoBehaviour:
   statusImg: {fileID: 133259158370176229}
   capPoint: {fileID: 8721359286624017192}
   backgroundArray:
-  - {fileID: 21300000, guid: 1e01cf08a72992841a4aa97f65745b5d, type: 3}
-  - {fileID: 21300000, guid: d8390247bbce9854790f52ae8da8a2af, type: 3}
-  - {fileID: 21300000, guid: 15b45577f6dcc2f46ae50bf87866130c, type: 3}
+  - {fileID: 21300000, guid: ba45af34f876bd549a565589f7dcb9cb, type: 3}
+  - {fileID: 21300000, guid: d0102a8e80a35314b894442b773ac443, type: 3}
+  - {fileID: 21300000, guid: 1ac1ee8ef7ca8ff41bc4f7bd243d9225, type: 3}
   foregroundArray:
-  - {fileID: 21300000, guid: 9a289340a1ab8184fa912aad776a4540, type: 3}
-  - {fileID: 21300000, guid: 50b65d39bfefffe41a0a428096bc6803, type: 3}
-  - {fileID: 21300000, guid: 5898c0c33c997a14eb756323c7bf65b0, type: 3}
+  - {fileID: 21300000, guid: 7ba11f91c7ff97b429da3eb07ae1f006, type: 3}
+  - {fileID: 21300000, guid: 47e629aee27c70a4eb98a231f52b4c81, type: 3}
+  - {fileID: 21300000, guid: 0da36b5043491544d9d224386a4d8f49, type: 3}
 --- !u!1 &8721359286136160514
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +415,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1689058661
-  m_SortingLayer: 0
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b2b1fbce694a5354991d4b9141cedbe3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
@@ -474,11 +474,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba83713e6242bb343bec86706258cd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  owner: 
   ownership: 0
   captureRate: 0.01
   territory: {fileID: 8721359287536158564}
   upgrade: 0
+  gameManager: {fileID: 0}
   capturerName: 
 --- !u!58 &8721359286624017195
 CircleCollider2D:
