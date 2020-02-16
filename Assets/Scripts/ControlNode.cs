@@ -113,11 +113,7 @@ public class ControlNode
             {
                 setState(State.Capturing, stayingTeam);
             }
-            //#2. runs contested if it happens to be contesting
-            else if (!challengers.Contains(stayingTeam))
-            {
-                setState(State.Contested, stayingTeam);
-            }
+            
         }
     }
 
