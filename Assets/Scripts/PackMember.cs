@@ -23,8 +23,6 @@ public class PackMember : MonoBehaviour
 
     protected List<Vector2> points = new List<Vector2>() { new Vector2(-3f, 5f) };
 
-
-
     public void Start()
     {
         rbody = GetComponent<Rigidbody2D>();
