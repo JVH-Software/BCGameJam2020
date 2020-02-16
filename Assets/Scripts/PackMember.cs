@@ -84,7 +84,7 @@ public class PackMember : MonoBehaviour
         if (dead)
             return;
 
-        gun.Shoot(target, pack, this);
+        gun.Shoot(target, this);
 
     }
 
