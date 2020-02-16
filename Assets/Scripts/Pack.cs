@@ -16,16 +16,17 @@ public class Pack : MonoBehaviour
     public float knockbackMultiplier = 1f;
     public Transform respawnPoint;
     private List<PackMember> packMembers = new List<PackMember>();
-    public PackMember packLeader;
+    internal PackMember packLeader;
     public float attackRange = 5;
 
     public float health = 50f;
     public float maxHealth = 50f;
 
-    internal UpgradeList upgrades;
-    public Pack attackTarget;
-    public UnityEngine.Tilemaps.Tilemap tilemap;
+    public UpgradeList upgrades;
+    private Pack attackTarget;
     public SimpleHealthBar healthBar;
+
+    internal GameManager gameManager;
 
 
     public float formationSpread = 1.5f;
@@ -34,12 +35,18 @@ public class Pack : MonoBehaviour
     public int formation = 0;
 
     public void Start() {
+
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+
         upgrades = new UpgradeList(this);
         for(int i = 0; i < transform.childCount; i++)
         {
             packMembers.Add(transform.GetChild(i).GetComponent<PackMember>());
         }
+
+        // Assign pack leader
         if (packLeader == null) packLeader = packMembers[0];
+
         // get initial positions
         PackMove();
 
@@ -49,15 +56,36 @@ public class Pack : MonoBehaviour
 
     private void Update() {
 
+        // Get closest pack
+        TargetNearestPack();
+
+        // Target pack leader
         GameObject target = attackTarget.packLeader.gameObject;
 
-        // Priority 1: If player is in agro range
+        // Get into range
         if (target != null) {
             Move(target.transform.position);
         }
-
+        // Attack when in range
         if (target != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, target.transform.position)) <= attackRange) {
             Shoot(target.transform.position);
+        }
+    }
+
+    private void TargetNearestPack()
+    {
+        float dist = -1;
+        for (int i = 0; i < gameManager.packs.Length; i++)
+        {
+            if (!gameManager.packs[i].tag.Equals(this.tag))
+            {
+                float tempDist = Mathf.Abs(Vector2.Distance(gameManager.packs[i].packLeader.transform.position, transform.position));
+                if (tempDist < dist || dist == -1)
+                {
+                    dist = tempDist;
+                    attackTarget = gameManager.packs[i];
+                }
+            }
         }
     }
 
@@ -106,7 +134,7 @@ public class Pack : MonoBehaviour
                 ((2 * Mathf.PI) / packMembers.Count) * counter,
                 packLeader.transform.position.x,
                 packLeader.transform.position.y),
-                tilemap,
+                gameManager.ground,
                 touchedTiles);
 
             // add this to our nono list
@@ -132,7 +160,7 @@ public class Pack : MonoBehaviour
         health = maxHealth;
         var takenTiles = "";
         foreach (PackMember packMember in packMembers) {
-            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, tilemap, takenTiles);
+            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, gameManager.ground, takenTiles);
             takenTiles += pos.x + "," + pos.y + "|";
             packMember.transform.position = pos;
             packMember.dead = false;
