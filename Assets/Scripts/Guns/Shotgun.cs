@@ -6,20 +6,19 @@ public class Shotgun : Gun
 {
     
     public int numBullets = 3;
-    private bool canShoot = false;
-    private float shotgunRoF;
+    private int shotgunRoF;
 
     // - Shotgun multipliers!
-    private int recoilMultiplier = 3;
-    private int damageMultiplier = 2;
-    private int knockbackMultiplier = 2;
-    private int projectileMultiplier = 2;
+    private float recoilMultiplier = 1.5f;
+    private float damageMultiplier = 2f;
+    private float knockbackMultiplier = 1.5f;
+    private float projectileMultiplier = 2f;
 
     private void Awake()
     {
         //- Assumes rate is num bullets per seconds
         // - ex. rateOfFire = 200, 2 bullets per second
-        shotgunRoF = (float)rateOfFire / 100;
+        shotgunRoF = rateOfFire  * 2;
 
         // - Spread depends on number of bullets
         spread *= Mathf.RoundToInt(numBullets * 0.50f);
@@ -27,19 +26,27 @@ public class Shotgun : Gun
         damage *= damageMultiplier;
         knockbackStrength *= knockbackMultiplier;
         projectileSpeed *= projectileMultiplier;
-        StartCoroutine("FirerateWatcher");
+    }
+
+    private void Update()
+    {
+        fireDelay -= 1;
+        if(fireDelay <= 0)
+        {
+            fireDelay = 0;
+        }
     }
 
     public override void Shoot(Vector3 target, PackMember shooter) 
     {
-        if (canShoot)
+        if (fireDelay == 0)
         {
-            canShoot = false;
+            
             for (int i = 0; i < numBullets; i++)
             {
                 Vector3 direction = base.computeMovementVector(target, shooter);
                 Quaternion rotation = base.computeBulletRotation(direction);
-                
+                fireDelay = shotgunRoF;
                 GameObject bullet = Instantiate(projectile, transform.position, rotation);
                 // - Low despawn time to simulate close range
                 bullet.GetComponent<Bullet>().timeToDespawn = 10;
@@ -49,16 +56,5 @@ public class Shotgun : Gun
                     shooter.Knockback(direction * -recoil);
             }
         }
-    }
-
-    // - Similar stradegy with fireDelay and Update, just only using booleans and coroutines instead.
-    IEnumerator FirerateWatcher()
-    {
-        while (true)
-        {
-            canShoot = true;
-            yield return new WaitForSeconds(1 / shotgunRoF);
-        }
-        
     }
 }

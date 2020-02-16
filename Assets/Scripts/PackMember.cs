@@ -34,8 +34,7 @@ public class PackMember : MonoBehaviour
     public void FixedUpdate()
     {
         if (Mathf.Abs(Vector2.Distance(this.transform.position, _staticTarget)) > 0.6) {
-            PerformMovement();
-            
+            PerformMovement();    
         }
     }
 
@@ -63,8 +62,7 @@ public class PackMember : MonoBehaviour
         direction.Normalize();
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         //angle - 90 accounts for sprite rotation
-        this.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
- 
+        this.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward); 
     }
 
 
