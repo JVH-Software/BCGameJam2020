@@ -28,7 +28,11 @@ public class GameManager : MonoBehaviour
 
         gd = GameObject.Find("GlobalData").GetComponent<GlobalData>();
 
-        if (gd.seed != 0)
+        if (gd.seed == 0)
+        {
+            gd.seed = UnityEngine.Random.Range(0, 10000);
+        }
+        else
         {
             UnityEngine.Random.InitState(gd.seed);
         }
