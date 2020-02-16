@@ -24,8 +24,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
-        UnityEngine.Random.InitState(seed);
+        if (seed != 0)
+        {
+            UnityEngine.Random.InitState(seed);
+        }
 
         // GetComponents should always be tried to be called in Start rather than Update
         GameObject[] capturePointObjs = GameObject.FindGameObjectsWithTag("CapturePoint");
