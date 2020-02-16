@@ -29,6 +29,8 @@ public class Pack : MonoBehaviour
     internal GameManager gameManager;
 
     public GameObject packMemberPrefab;
+    private int respawnCount = 0;
+    public int respawnDelay = 200;
 
 
     public float formationSpread = 1.5f;
@@ -81,6 +83,16 @@ public class Pack : MonoBehaviour
         if (target != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, target.transform.position)) <= attackRange) {
             Shoot(target.transform.position);
         }
+
+        if(dead)
+        {
+            respawnCount++;
+            if (respawnCount >= respawnDelay)
+            {
+                respawnCount = respawnDelay;
+                Respawn();
+            }
+        }
     }
 
     private void TargetNearestPack()
@@ -123,6 +135,7 @@ public class Pack : MonoBehaviour
     }
 
     private string _lastLeaderPos = null;
+    private bool dead;
 
     private void CircleFormation(bool force=false) {
         
@@ -169,14 +182,19 @@ public class Pack : MonoBehaviour
     {
 
         Transform respawnPoint = gameManager.FindRandomOwnedPoint(tag).transform;
-
-        health = maxHealth;
-        var takenTiles = "";
-        foreach (PackMember packMember in packMembers) {
-            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, gameManager.ground, takenTiles);
-            takenTiles += pos.x + "," + pos.y + "|";
-            packMember.transform.position = pos;
-            packMember.dead = false;
+        if (respawnPoint != null)
+        {
+            respawnCount = 0;
+            dead = false;
+            health = maxHealth;
+            var takenTiles = "";
+            foreach (PackMember packMember in packMembers)
+            {
+                var pos = Utility.GetClosestWalkableTile(respawnPoint.position, gameManager.ground, takenTiles);
+                takenTiles += pos.x + "," + pos.y + "|";
+                packMember.transform.position = pos;
+                packMember.MemberRessurect();
+            }
         }
     }
 
@@ -184,6 +202,7 @@ public class Pack : MonoBehaviour
         foreach (PackMember packMember in packMembers) {
             packMember.MemberDeath();
         }
+        dead = true;
     }
 
     public void ModifyHealth(float amount, PackMember lastHit = null) {
