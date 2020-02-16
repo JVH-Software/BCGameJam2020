@@ -24,7 +24,7 @@ public class Pack : MonoBehaviour
     public float health = 50f;
     public float maxHealth = 50f;
 
-    public UpgradeList upgrades;
+    internal UpgradeList upgrades;
     private Pack attackTarget;
     public SimpleHealthBar healthBar;
 
