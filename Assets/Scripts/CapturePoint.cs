@@ -23,6 +23,7 @@ public class CapturePoint : MonoBehaviour
                 tags.Add(pack.tag);
             }
         }
+        Debug.Log(tags.Count);
         if(tags.Count == 1)
         {
             string attacker = tags[0];
@@ -58,7 +59,6 @@ public class CapturePoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (!packs.Contains(other) && Teams.teams.ContainsKey(other.tag)) {
             packs.Add(other);
         }
@@ -66,7 +66,6 @@ public class CapturePoint : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (packs.Contains(other))
         {
             packs.Remove(other);
