@@ -5,19 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerPack : Pack
 {
-    new void Start()
-    {
-        base.Start();
-    }
 
+    // Update is called once per frame
     void Update()
     {
-        // Movement
-        movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        // Shoot
-        if (Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetMouseButton(0)) {
             Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         }
 

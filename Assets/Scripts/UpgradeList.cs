@@ -18,7 +18,7 @@ public class UpgradeList : List<Upgrades>
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speed += 3;
+                pack.speedMultiplier *= 2;
                 break;
             case Upgrades.FasterShot:
                 pack.projectileSpeedMultiplier *= 2;
@@ -33,7 +33,7 @@ public class UpgradeList : List<Upgrades>
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speed -= 3;
+                pack.speedMultiplier *= 1/2;
                 break;
             case Upgrades.FasterShot:
                 pack.projectileSpeedMultiplier *= 1/2;
