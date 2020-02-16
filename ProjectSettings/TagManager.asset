@@ -7,6 +7,8 @@ TagManager:
   - Pack
   - UpperBarriers
   - AlphaPack
+  - Wolf
+  - Bear
   layers:
   - Default
   - TransparentFX
