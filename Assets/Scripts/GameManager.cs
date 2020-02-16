@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         int controlled = 0;
         for (int i = 0; i < capturePoints.Length; i++)
         {
-            if (capturePoints[i].owner.Equals("Player"))
+            if (capturePoints[i].owner != null && capturePoints[i].owner.tag.Equals("Player"))
                 controlled++;
         }
         if(((float)controlled)/capturePoints.Length >= winningPercent)

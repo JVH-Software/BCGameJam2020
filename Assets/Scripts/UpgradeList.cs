@@ -37,6 +37,7 @@ public class UpgradeList : List<Upgrades>
 
     public new void Remove(Upgrades upgrade)
     {
+
         base.Remove(upgrade);
 
         switch (upgrade)

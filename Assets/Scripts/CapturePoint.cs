@@ -5,7 +5,7 @@ using UnityEngine;
 public class CapturePoint : MonoBehaviour
 {
 
-    public string owner = "";
+    public Pack owner = null;
     public float ownership = 1;
     public float captureRate = 0.01f;
     public Territory territory;
@@ -26,15 +26,16 @@ public class CapturePoint : MonoBehaviour
         if(tags.Count == 1)
         {
             string attacker = tags[0];
-            if(attacker != owner && owner != "")
+            if(owner != null && attacker != owner.tag)
             {
                 ownership -= captureRate;
                 if(ownership < 0)
                 {
                     // Ownership lost
-                    packs[0].gameObject.GetComponent<PackMember>().pack.upgrades.Remove(upgrade);
+                    Debug.Log(owner.tag + " just lost a control point!");
+                    owner.upgrades.Remove(upgrade);
                     territory.SetTerritoryColor(Color.white);
-                    owner = "";
+                    owner = null;
                     ownership *= -1;
                 }
             }
@@ -43,12 +44,13 @@ public class CapturePoint : MonoBehaviour
                 ownership += captureRate;
                 if(ownership >= 1)
                 {
-                    if(owner == "")
+                    if(owner == null)
                     {
                         // Ownership won
-                        owner = attacker;
+                        Debug.Log(packs[0].tag + " just captured a control point!");
+                        owner = packs[0].gameObject.GetComponent<PackMember>().pack;
                         territory.SetTerritoryColor(Teams.teams[attacker]);
-                        packs[0].gameObject.GetComponent<PackMember>().pack.upgrades.Remove(upgrade);
+                        packs[0].gameObject.GetComponent<PackMember>().pack.upgrades.Add(upgrade);
                     }
                     ownership = 1;
                 }
