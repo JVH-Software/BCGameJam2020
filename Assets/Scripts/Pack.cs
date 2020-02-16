@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class Pack : MonoBehaviour
@@ -13,9 +15,14 @@ public class Pack : MonoBehaviour
     public List<PackMember> packMembers;
     public PackMember packLeader;
     public float attackRange = 5;
+    
+    public float health = 50f;
+    public float maxHealth = 50f;
+
     protected UpgradeList upgrades;
     public GameObject attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
+    public SimpleHealthBar healthBar;
 
     public float formationSpread = 1.5f;
 
@@ -28,6 +35,9 @@ public class Pack : MonoBehaviour
 
         // get initial positions
         PackMove();
+
+        // Check health.
+        ModifyHealth(0);
     }
 
     private void Update() {
@@ -109,11 +119,57 @@ public class Pack : MonoBehaviour
 
     public void Respawn()
     {
-        foreach (PackMember packMember in packMembers)
-        {
-            packMember.health = packMember.maxHealth;
-            packMember.transform.position = respawnPoint.position;
+        health = maxHealth;
+        var takenTiles = "";
+        foreach (PackMember packMember in packMembers) {
+            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, tilemap, takenTiles);
+            takenTiles += pos.x + "," + pos.y + "|";
+            packMember.transform.position = pos;
             packMember.dead = false;
         }
+    }
+
+    protected void Death() {
+        foreach (PackMember packMember in packMembers) {
+            packMember.MemberDeath();
+        }
+    }
+
+    public void ModifyHealth(float amount, PackMember lastHit = null) {
+        health += amount;
+
+        var deathUnit = maxHealth / packMembers.Count;
+        var numDead = (int)((maxHealth- health) / deathUnit);
+        
+        if (health <= 0) {
+            Death();
+        } else if (health > maxHealth) {
+            health = maxHealth;
+        }
+
+        int actualDead = 0;
+        foreach (var pm in packMembers) {
+            if (pm.dead) actualDead++;
+        }
+
+        if (actualDead > numDead) 
+            foreach (var savedGuys in packMembers.Where(x => x.dead).Take(actualDead - numDead).AsEnumerable()) 
+                savedGuys.MemberRessurect();
+        else if (actualDead < numDead) {
+            if (lastHit != null) { 
+                // kill the last guy that got hit
+                lastHit.MemberDeath();
+                // count it
+                actualDead += 1;
+            }
+            // if we still need to kill, do so
+            if (actualDead < numDead) foreach (var doomedGuys in packMembers.Where(x => !x.dead).Take(numDead - actualDead).AsEnumerable()) 
+                doomedGuys.MemberDeath();
+        }
+        
+        if (healthBar != null) {
+            healthBar.UpdateBar(health, maxHealth);
+        }
+
     }
 }
