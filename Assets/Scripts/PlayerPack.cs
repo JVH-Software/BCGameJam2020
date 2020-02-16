@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerPack : Pack
 {
@@ -18,6 +19,10 @@ public class PlayerPack : Pack
         if (Input.GetMouseButtonDown(0))
         {
             Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        }
+
+        if (Input.GetKey(KeyCode.Escape)) {
+            SceneManager.LoadScene("StartMenu");
         }
     }
 }
