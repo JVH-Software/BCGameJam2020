@@ -15,20 +15,22 @@ public class GameManager : MonoBehaviour
     public Tilemap ground;
     public UIOverlay healthbar;
 
-    // Level Generation
-    public int seed = 0;
-    public int numEnemyTeams = 1;
-    public int numStartingPackMembers = 1;
-    public int numPacksPerTeam = 1;
-
     public GameObject playerPackPrefab;
     public GameObject packPrefab;
 
+    private GlobalData gd;
+    private int numEnemyTeams;
+    private int numStartingPackMembers;
+    private int numPacksPerTeam;
+
     private void Start()
     {
-        if (seed != 0)
+
+        gd = GameObject.Find("GlobalData").GetComponent<GlobalData>();
+
+        if (gd.seed != 0)
         {
-            UnityEngine.Random.InitState(seed);
+            UnityEngine.Random.InitState(gd.seed);
         }
 
         // GetComponents should always be tried to be called in Start rather than Update
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
             capturePoints[i] = capturePointObjs[i].GetComponent<CapturePoint>();
         }
 
-        GenerateLevel();
+        GenerateLevel(gd.level);
 
         /*// Find packs
         packs = new Pack[packsContainer.transform.childCount];
@@ -64,8 +66,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void GenerateLevel()
+    void GenerateLevel(int level)
     {
+        numEnemyTeams = allLevelParameters[level].numEnemyTeams;
+        numStartingPackMembers = allLevelParameters[level].numStartingPackMembers;
+        numPacksPerTeam = allLevelParameters[level].numPacksPerTeam;
+
         if(numEnemyTeams + 1 > Teams.teams.Count)
         {
             throw new UnityException();
@@ -205,6 +211,31 @@ public class GameManager : MonoBehaviour
         return pack.GetComponent<Pack>();
     }
 
+    public struct LevelParameters
+    {
+        public int numEnemyTeams;
+        public int numStartingPackMembers;
+        public int numPacksPerTeam;
 
+        public LevelParameters(int numEnemyTeams, int numStartingPackMembers, int numPacksPerTeam)
+        {
+            this.numEnemyTeams = numEnemyTeams;
+            this.numStartingPackMembers = numStartingPackMembers;
+            this.numPacksPerTeam = numPacksPerTeam;
+        }
+    }
+
+    private LevelParameters[] allLevelParameters = {
+        new LevelParameters(1,1,1), // Level 1
+        new LevelParameters(1,2,1), // Level 2
+        new LevelParameters(2,2,1), // Level 3
+        new LevelParameters(2,2,1), // Level 4
+        new LevelParameters(2,3,1), // Level 5
+        new LevelParameters(2,3,1), // Level 6
+        new LevelParameters(2,2,2), // Level 7
+        new LevelParameters(3,2,1), // Level 8
+        new LevelParameters(3,3,2), // Level 9
+        new LevelParameters(3,3,3)  // Level 10
+    };
 
 }
