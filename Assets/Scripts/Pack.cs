@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class Pack : MonoBehaviour
@@ -16,9 +18,15 @@ public class Pack : MonoBehaviour
     private List<PackMember> packMembers = new List<PackMember>();
     public PackMember packLeader;
     public float attackRange = 5;
-    public GameObject attackTarget;
+
+    public float health = 50f;
+    public float maxHealth = 50f;
+
+    internal UpgradeList upgrades;
+    public Pack attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
-    public UpgradeList upgrades;
+    public SimpleHealthBar healthBar;
+
 
     public float formationSpread = 1.5f;
 
@@ -34,17 +42,22 @@ public class Pack : MonoBehaviour
         if (packLeader == null) packLeader = packMembers[0];
         // get initial positions
         PackMove();
+
+        // Check health.
+        ModifyHealth(0);
     }
 
     private void Update() {
 
+        GameObject target = attackTarget.packLeader.gameObject;
+
         // Priority 1: If player is in agro range
-        if (attackTarget != null) {
-            Move(attackTarget.transform.position);
+        if (target != null) {
+            Move(target.transform.position);
         }
 
-        if (attackTarget != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, attackTarget.transform.position)) <= attackRange) {
-            Shoot(attackTarget.transform.position);
+        if (target != null && Mathf.Abs(Vector2.Distance(packLeader.transform.position, target.transform.position)) <= attackRange) {
+            Shoot(target.transform.position);
         }
     }
 
@@ -116,11 +129,72 @@ public class Pack : MonoBehaviour
 
     public void Respawn()
     {
-        foreach (PackMember packMember in packMembers)
-        {
-            packMember.health = packMember.maxHealth;
-            packMember.transform.position = respawnPoint.position;
+        health = maxHealth;
+        var takenTiles = "";
+        foreach (PackMember packMember in packMembers) {
+            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, tilemap, takenTiles);
+            takenTiles += pos.x + "," + pos.y + "|";
+            packMember.transform.position = pos;
             packMember.dead = false;
         }
+    }
+
+    protected void Death() {
+        foreach (PackMember packMember in packMembers) {
+            packMember.MemberDeath();
+        }
+    }
+
+    public void ModifyHealth(float amount, PackMember lastHit = null) {
+        health += amount;
+
+        var deathUnit = maxHealth / packMembers.Count;
+        var numDead = (int)((maxHealth- health) / deathUnit);
+        
+        if (health <= 0) {
+            Death();
+        } else if (health > maxHealth) {
+            health = maxHealth;
+        }
+
+        int actualDead = 0;
+        foreach (var pm in packMembers) {
+            if (pm.dead) actualDead++;
+        }
+
+        if (actualDead > numDead) 
+            foreach (var savedGuys in packMembers.Where(x => x.dead).Take(actualDead - numDead).AsEnumerable()) 
+                savedGuys.MemberRessurect();
+        else if (actualDead < numDead) {
+            if (lastHit != null) { 
+                // kill the last guy that got hit
+                lastHit.MemberDeath();
+                // count it
+                actualDead += 1;
+            }
+            // if we still need to kill, do so
+            if (actualDead < numDead) foreach (var doomedGuys in packMembers.Where(x => !x.dead).Take(numDead - actualDead).AsEnumerable()) 
+                doomedGuys.MemberDeath();
+        }
+
+        // assign a new leader if need be
+        if(packLeader.dead && numDead < packMembers.Count) {
+            var counter = 0;
+            while (counter < packMembers.Count) {
+                if (packMembers[counter].dead != true) {
+                    packLeader = packMembers[counter];
+                    if(packLeader.tag.Equals("Player")) {
+                        Camera.main.GetComponent<CameraTracking>().target = packLeader.gameObject;
+                    }
+                    break;
+                }
+                counter++;
+            }
+        }
+        
+        if (healthBar != null) {
+            healthBar.UpdateBar(health, maxHealth);
+        }
+
     }
 }

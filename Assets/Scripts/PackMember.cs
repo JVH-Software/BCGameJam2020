@@ -5,11 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class PackMember : MonoBehaviour
 {
-
-    public float health = 10f;
-    public float maxHealth = 10f;
     public float speed = 1f;
-    public SimpleHealthBar healthBar;
     internal Pack pack;
     public float agroRange = 5;
 
@@ -89,7 +85,7 @@ public class PackMember : MonoBehaviour
 
     public void Hit(float damage, Vector2 knockback)
     {
-        ModifyHealth(-damage);
+        pack.ModifyHealth(-damage, this);
         Knockback(knockback);
     }
 
@@ -98,28 +94,15 @@ public class PackMember : MonoBehaviour
         rbody.velocity = (rbody.velocity + knockback);
     }
 
-    protected void ModifyHealth(float amount)
+    public void MemberDeath()
     {
-        health += amount;
-        if (health <= 0)
-        {
-            Death();
-        }
-        else if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-
-        if (healthBar != null)
-        {
-            healthBar.UpdateBar(health, maxHealth);
-        }
-        
+        this.gameObject.SetActive(false);
+        dead = true;
     }
 
-    private void Death()
-    {
-        dead = true;
+    public void MemberRessurect() {
+        this.gameObject.SetActive(true);
+        dead = false;
     }
 
     // Relative to current position

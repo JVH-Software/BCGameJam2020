@@ -9,7 +9,7 @@ public class PlayerPack : Pack
     // Update is called once per frame
     void Update()
     {
-        MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+         MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetMouseButton(0)) {
             Shoot(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -30,5 +30,9 @@ public class PlayerPack : Pack
             PackMove(true);
         }
 
+    }
+
+    protected new void Death() {
+        SceneManager.LoadScene("GameOver");
     }
 }
