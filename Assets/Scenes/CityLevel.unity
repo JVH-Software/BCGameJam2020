@@ -289,6 +289,16 @@ PrefabInstance:
       propertyPath: upgrade
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 2010088532}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -3934,6 +3944,16 @@ PrefabInstance:
       propertyPath: upgrade
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 2010088532}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -4171,6 +4191,16 @@ PrefabInstance:
       propertyPath: upgrade
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 281096363}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -4447,6 +4477,16 @@ PrefabInstance:
       propertyPath: upgrade
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 2010088532}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -4533,6 +4573,16 @@ PrefabInstance:
       propertyPath: upgrade
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 281096363}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -4709,6 +4759,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 281096363}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -46640,6 +46700,16 @@ PrefabInstance:
       propertyPath: upgrade
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: ownership
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8721359286624017192, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 2010088532}
     - target: {fileID: 8721359286624017194, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_Name
@@ -81541,6 +81611,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &2010088532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4715075852040691938, guid: dfc0e806426f57b4184a6dfc59f7012b,
+    type: 3}
+  m_PrefabInstance: {fileID: 921803454}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f827e12f0133742bb42592e4b83b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2109671427
 PrefabInstance:
   m_ObjectHideFlags: 0
