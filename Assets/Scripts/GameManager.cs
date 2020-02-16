@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
                     }
                     else
                     {
-                        pack = GeneratePack(enemyTeamTags[i], capturePointsRandomized[count].transform.position);
+                        pack = GeneratePack(enemyTeamTags[i-1], capturePointsRandomized[count].transform.position);
                     }
                     packs[i] = pack;
                 }
