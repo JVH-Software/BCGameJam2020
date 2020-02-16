@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
             capturePoints[i].RemoveOwnership();
             capturePoints[i].upgrade = availableUpgrades[i];
         }
+        int count = 0;
         for (int i = 0; i < numEnemyPacks+1; i++)
         {
             for (int j = 0; j < capPointsPerTeam; j++)
@@ -105,15 +106,17 @@ public class GameManager : MonoBehaviour
                     Pack pack;
                     if (i == 0)
                     {
-                        pack = GeneratePack("Player", capturePointsRandomized[i+j].transform.position);
+                        pack = GeneratePack("Player", capturePointsRandomized[count].transform.position);
                     }
                     else
                     {
-                        pack = GeneratePack(enemyTeamTags[i], capturePointsRandomized[i + j].transform.position);
+                        pack = GeneratePack(enemyTeamTags[i], capturePointsRandomized[count].transform.position);
                     }
                     packs[i] = pack;
                 }
-                capturePointsRandomized[i + j].SetOwnership(packs[i]);
+                capturePointsRandomized[count].SetOwnership(packs[i]);
+                count++;
+
             }
         }
     }
