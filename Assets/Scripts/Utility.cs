@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -14,10 +16,12 @@ public static class Utility
     /// <param name="tilemap">map of valid tiles</param>
     /// <param name="unavailableTiles">tiles we want to avoid</param>
     /// <returns>Vector2 of nearest walkable ground</returns>
-    public static Vector2 GetClosestWalkableTile(int x, int y, Tilemap tilemap, List<Vector2> unavailableTiles = null) {
+    public static Vector2 GetClosestWalkableTile(int x, int y, Tilemap tilemap, string unavailableTiles = "") {
         // If this tile is walkable, return it. (as long as it's not a nono!)
-        if (tilemap.GetTile(new Vector3Int(x, y, 0)) && (unavailableTiles == null || !unavailableTiles.Contains(new Vector2(x, y))))
+        if (tilemap.GetTile(new Vector3Int(x, y, 0)) && !unavailableTiles.Contains(x + "," + y)) {
             return new Vector2(x, y);
+        }
+            
 
         var level = 0;
         while (level < 100) { // arbirtaray stop condition to prevent it from spiraling out of control
@@ -26,9 +30,8 @@ public static class Utility
             for (int i = x - level; i <= x + level; i++)
                 for (int j = y - level; j <= y + level; j++)
                     // only check if this tile is on the edge of the ring
-                    if ((i == x - level || i == x + level) || (j == y - level || j == y + level) && 
-                        // and it isn't in our nono list
-                        (unavailableTiles == null || !unavailableTiles.Contains(new Vector2(x, y)))) {
+                    if (((i == x - level || i == x + level) || (j == y - level || j == y + level)) &&
+                        !unavailableTiles.Contains(i + "," + j)) { // and it isn't in our nono list
                         if (tilemap.GetTile(new Vector3Int(i, j, 0)))
                             return new Vector2(i, j);
                     }
@@ -36,7 +39,7 @@ public static class Utility
         // this shouldn't happen
         return new Vector2();
     }
-    public static Vector2 GetClosestWalkableTile(Vector2 v, Tilemap t, List<Vector2> touchedTiles = null) {
+    public static Vector2 GetClosestWalkableTile(Vector2 v, Tilemap t, string touchedTiles = "") {
         return Utility.GetClosestWalkableTile((int)v.x, (int)v.y, t, touchedTiles);
     }
 
