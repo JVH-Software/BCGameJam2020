@@ -18,10 +18,19 @@ public class UpgradeList : List<Upgrades>
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speed += 3;
+                pack.speedMultiplier *= 2;
                 break;
             case Upgrades.FasterShot:
-                pack.shootSpeed += 50;
+                pack.projectileSpeedMultiplier *= 2;
+                break;
+            case Upgrades.DamageBoost:
+                pack.damageMultiplier *= 2;
+                break;
+            case Upgrades.DefenceBoost:
+                pack.defenceMultiplier /= 2;
+                break;
+            case Upgrades.ExtraKnockback:
+                pack.knockbackMultiplier *= 2;
                 break;
         }
     }
@@ -30,16 +39,27 @@ public class UpgradeList : List<Upgrades>
     {
         base.Remove(upgrade);
 
+        Debug.Log("Twice?");
+
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
-                pack.speed -= 3;
+                pack.speedMultiplier /= 2;
                 break;
             case Upgrades.FasterShot:
-                pack.shootSpeed -= 50;
+                pack.projectileSpeedMultiplier /= 2;
+                break;
+            case Upgrades.DamageBoost:
+                pack.damageMultiplier *= 1/2;
+                break;
+            case Upgrades.DefenceBoost:
+                pack.defenceMultiplier *= 2;
+                break;
+            case Upgrades.ExtraKnockback:
+                pack.knockbackMultiplier /= 2;
                 break;
         }
     }
 }
 
-public enum Upgrades {SpeedBoost, FasterShot};
+public enum Upgrades {SpeedBoost, FasterShot, DamageBoost, DefenceBoost, PerfectAim, NoRecoil, ExtraKnockback };

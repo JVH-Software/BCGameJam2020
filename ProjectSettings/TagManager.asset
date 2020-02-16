@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - UpperBarriers
+  - AlphaPack
   layers:
   - Default
   - TransparentFX
@@ -17,7 +19,7 @@ TagManager:
   - UpperBarriers
   - Packs
   - Bullets
-  - 
+  - Territories
   - 
   - 
   - 
@@ -52,4 +54,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 2605908635
+    locked: 0
+  - name: Territory
+    uniqueID: 2742566767
     locked: 0
