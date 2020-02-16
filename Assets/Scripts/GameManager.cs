@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public enum States {intro, main, paused};
     private const string CONTROL_POINT_TAG = "control point";
     public GameObject[] controlPoints;
-    public List<ControlNode> controlNodes = new List<ControlNode>();
+    public List<ControlNodeObject> ControlNodeObjects = new List<ControlNodeObject>();
   
     private void Awake()
     {
@@ -28,8 +28,8 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject point in controlPoints)
         {
-            ControlNode node = point.GetComponent<ControlNode>();
-            controlNodes.Add(node);
+            ControlNodeObject node = point.GetComponent<ControlNodeObject>();
+            ControlNodeObjects.Add(node);
         }
     }
 
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public ControlNode getNode(int index)
+    public ControlNodeObject getNode(int index)
     {
         //return nodeList[index];
         return null; 
