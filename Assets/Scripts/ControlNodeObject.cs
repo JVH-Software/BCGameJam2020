@@ -9,7 +9,7 @@ public class ControlNodeObject : MonoBehaviour
     private const string WOLF_TAG = "Wolf";
     private const string BEAR_TAG = "Bear";
     private const double CAPTURE_RATE = 1 / 3f;
-    private ControlNode node;
+    public ControlNode node;
     private SpriteRenderer renderer;
 
     [SerializeField]
@@ -88,6 +88,12 @@ public class ControlNodeObject : MonoBehaviour
             capturingTeam = Team.NoTeam;
             occupants.Clear();
         }
+
+        public double GetCapturePercentage()
+        {
+            return percentageOfCapture;
+        }
+
         //-----------------Team detection methods-----------------
         //
         // - Corresponds to enter, stay, and exit watcher methods of trigger2d.

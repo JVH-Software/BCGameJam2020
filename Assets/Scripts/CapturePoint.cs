@@ -5,24 +5,51 @@ using UnityEngine;
 public class CapturePoint : MonoBehaviour
 {
 
-    public Pack owner = null;
+    public string owner = "";
     public float ownership = 1;
     public float captureRate = 0.01f;
     public Territory territory;
     public Upgrades upgrade;
+    public GameManager gameManager;
+    public string capturerName;
 
     private List<Collider2D> packs = new List<Collider2D>();
 
     private void Start()
     {
-        if (owner == null)
+        gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+    }
+
+    public void SetOwnership(string newOwner)
+    {
+
+        territory.SetTerritoryColor(Teams.teams[newOwner]);
+        foreach (Pack p in gameManager.packs)
         {
-            territory.SetTerritoryColor(Color.white);
+            if (p.tag.Equals(newOwner))
+                p.upgrades.Add(upgrade);
+        }
+        owner = newOwner;
+        ownership = 1;
+    }
+
+    public void RemoveOwnership()
+    {
+        territory.SetTerritoryColor(Color.white);
+
+        if (owner == "")
+        {
+            ownership = 0;
         }
         else
         {
-            territory.SetTerritoryColor(Teams.teams[owner.tag]);
-            owner.upgrades.Add(upgrade);
+            foreach(Pack p in gameManager.packs)
+            {
+                if(p.tag.Equals(owner))
+                    p.upgrades.Remove(upgrade);
+            }
+            owner = "";
+            ownership *= -1;
         }
     }
 
@@ -36,20 +63,23 @@ public class CapturePoint : MonoBehaviour
                 tags.Add(pack.tag);
             }
         }
+        if(tags.Count == 0)
+        {
+            capturerName = "";
+        }
         if(tags.Count == 1)
         {
             string attacker = tags[0];
-            if(owner != null && attacker != owner.tag)
+            capturerName = attacker;
+
+            if (owner != "" && attacker != owner)
+
             {
                 ownership -= captureRate;
                 if(ownership < 0)
                 {
                     // Ownership lost
-                    Debug.Log(owner.tag + " just lost a control point!");
-                    owner.upgrades.Remove(upgrade);
-                    territory.SetTerritoryColor(Color.white);
-                    owner = null;
-                    ownership *= -1;
+                    RemoveOwnership();
                 }
             }
             else
@@ -57,19 +87,21 @@ public class CapturePoint : MonoBehaviour
                 ownership += captureRate;
                 if(ownership >= 1)
                 {
-                    if(owner == null)
+                    if(owner == "")
                     {
                         // Ownership won
-                        Debug.Log(packs[0].tag + " just captured a control point!");
-                        owner = packs[0].gameObject.GetComponent<PackMember>().pack;
-                        territory.SetTerritoryColor(Teams.teams[attacker]);
-                        packs[0].gameObject.GetComponent<PackMember>().pack.upgrades.Add(upgrade);
+                        RemoveOwnership();
+                        SetOwnership(attacker);
                     }
                     ownership = 1;
                 }
             }
         }
     }
+
+    public bool isContested() { return packs.Count >= 2;  }
+    public bool IsBeingCaptured() { return capturerName != "";  }
+    public bool IsOwned() { return owner != "";  }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

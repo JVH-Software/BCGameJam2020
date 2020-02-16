@@ -9,6 +9,9 @@ public class PlayerPack : Pack
     // Update is called once per frame
     void Update()
     {
+
+        Camera.main.GetComponent<CameraTracking>().target = packLeader.gameObject;
+
          MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetMouseButton(0)) {
