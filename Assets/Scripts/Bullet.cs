@@ -66,7 +66,7 @@ public class Bullet : MonoBehaviour
             if (!coll.tag.Equals(shooter.tag))
             {
                 Instantiate(particleHit, transform.position, transform.rotation);
-                coll.gameObject.GetComponent<PackMember>().Hit(gun.damage, movementVector * gun.knockbackStrength);
+                coll.gameObject.GetComponent<PackMember>().Hit(gun.damage * pack.damageMultiplier, movementVector * gun.knockbackStrength * pack.knockbackMultiplier);
                 Destroy(gameObject);
             }
         }

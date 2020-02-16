@@ -9,6 +9,9 @@ public class Pack : MonoBehaviour
 
     public float speedMultiplier = 1f;
     public float projectileSpeedMultiplier = 1f;
+    public float damageMultiplier = 1f;
+    public float defenceMultiplier = 1f;
+    public float knockbackMultiplier = 1f;
     public Transform respawnPoint;
     public List<PackMember> packMembers;
     public PackMember packLeader;
@@ -64,6 +67,7 @@ public class Pack : MonoBehaviour
     }
 
     private string _lastLeaderPos = null;
+
 
     private void CircleFormation(bool force=false) {
         
