@@ -30,6 +30,7 @@ public class CapturePoint : MonoBehaviour
                 p.upgrades.Add(upgrade);
         }
         owner = newOwner;
+        ownership = 1;
     }
 
     public void RemoveOwnership()
