@@ -25,7 +25,7 @@ public class Pack : MonoBehaviour
     internal UpgradeList upgrades;
     public Pack attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
-    public SimpleHealthBar healthBar;
+    public UIOverlay overlay;
 
 
     public float formationSpread = 1.5f;
@@ -191,10 +191,7 @@ public class Pack : MonoBehaviour
                 counter++;
             }
         }
-        
-        if (healthBar != null) {
-            healthBar.UpdateBar(health, maxHealth);
-        }
 
+        overlay?.UpdateHealthBar(health, maxHealth);
     }
 }
