@@ -18,5 +18,17 @@ public class PlayerPack : Pack
         if (Input.GetKey(KeyCode.Escape)) {
             SceneManager.LoadScene("StartMenu");
         }
+
+        if (Input.GetKey(KeyCode.Space)) {
+            if (formationSpread != 6f) {
+                
+                formationSpread = 6f;
+                PackMove(true);
+            }            
+        } else if (formationSpread == 6f ) {
+            formationSpread = 1.5f;
+            PackMove(true);
+        }
+
     }
 }

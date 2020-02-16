@@ -17,6 +17,11 @@ public class Pack : MonoBehaviour
     public GameObject attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
 
+    public float formationSpread = 1.5f;
+
+    // 0 = circle, 1 = box, 2 = shuffle
+    public int formation = 0;
+
     public void Start() {
         upgrades = new UpgradeList(this);
         if (packLeader == null) packLeader = packMembers[0];
@@ -55,21 +60,29 @@ public class Pack : MonoBehaviour
         PackMove();
     }
 
-    protected void PackMove() {
+    protected void PackMove(bool force=false) {
+        CircleFormation(force);
+    }
 
-        var counter = 0;
-        var touchedTiles = new List<Vector2>();
+    private string _lastLeaderPos = null;
+
+    private void CircleFormation(bool force=false) {
+        
+        var counter = 1;
+        var touchedTiles = "";
 
         // add our main characters pos to the nono list
         // + 0.5 to get the tile we are in (player position is in the center, tile is top left)
-        touchedTiles.Add(new Vector2((int)(packLeader.transform.position.x), (int)(packLeader.transform.position.y)));
+        touchedTiles += (int)(packLeader.transform.position.x+0.5f) + "," + (int)(packLeader.transform.position.y+0.5f) + "|";
+        if (_lastLeaderPos == touchedTiles && !force) return;
+        _lastLeaderPos = touchedTiles;
 
         foreach (PackMember packMember in packMembers) {
             if (packMember == packLeader) continue;
 
             // Get closest point that is valid to move to (in clock formation around player)
             var point = Utility.GetClosestWalkableTile(
-                Utility.GetSpecificPointInCircle(1.5f,
+                Utility.GetSpecificPointInCircle(formationSpread,
                 ((2 * Mathf.PI) / packMembers.Count) * counter,
                 packLeader.transform.position.x,
                 packLeader.transform.position.y),
@@ -77,12 +90,14 @@ public class Pack : MonoBehaviour
                 touchedTiles);
 
             // add this to our nono list
-            touchedTiles.Add(point);
+            touchedTiles += (int)point.x + "," + (int)point.y + "|";
 
             // assign this target to the pack member
             packMember.SetTarget(point.x, point.y);
+
             counter++;
         }
+
     }
 
     public void Shoot(Vector3 target)
