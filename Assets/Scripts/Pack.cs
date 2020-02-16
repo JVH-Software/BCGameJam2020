@@ -16,7 +16,6 @@ public class Pack : MonoBehaviour
     public float knockbackMultiplier = 1f;
     public float fireRateMultiplier = 1f;
 
-    public Transform respawnPoint;
     private List<PackMember> packMembers = new List<PackMember>();
     internal PackMember packLeader;
     public float attackRange = 5;
@@ -28,6 +27,8 @@ public class Pack : MonoBehaviour
     private Pack attackTarget;
     public UIOverlay overlay;
     internal GameManager gameManager;
+
+    public GameObject packMemberPrefab;
 
 
     public float formationSpread = 1.5f;
@@ -44,19 +45,24 @@ public class Pack : MonoBehaviour
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
-        for(int i = 0; i < transform.childCount; i++)
-        {
-            packMembers.Add(transform.GetChild(i).GetComponent<PackMember>());
-        }
+        //AddMember();
 
         // Assign pack leader
-        if (packLeader == null) packLeader = packMembers[0];
+        //if (packLeader == null) packLeader = packMembers[0];
 
         // get initial positions
         PackMove();
 
         // Check health.
         ModifyHealth(0);
+    }
+
+    public void AddMember()
+    {
+        GameObject member = Instantiate(packMemberPrefab, transform);
+        member.tag = tag;
+        packMembers.Add(member.GetComponent<PackMember>());
+        if (packLeader == null) packLeader = packMembers[0];
     }
 
     private void Update() {
@@ -161,6 +167,9 @@ public class Pack : MonoBehaviour
 
     public void Respawn()
     {
+
+        Transform respawnPoint = gameManager.FindRandomOwnedPoint(tag).transform;
+
         health = maxHealth;
         var takenTiles = "";
         foreach (PackMember packMember in packMembers) {
@@ -171,7 +180,7 @@ public class Pack : MonoBehaviour
         }
     }
 
-    protected void Death() {
+    protected virtual void Death() {
         foreach (PackMember packMember in packMembers) {
             packMember.MemberDeath();
         }

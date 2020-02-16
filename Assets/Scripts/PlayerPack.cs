@@ -9,6 +9,9 @@ public class PlayerPack : Pack
     // Update is called once per frame
     void Update()
     {
+
+        Camera.main.GetComponent<CameraTracking>().target = packLeader.gameObject;
+
          MoveDir(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetMouseButton(0)) {
@@ -32,7 +35,14 @@ public class PlayerPack : Pack
 
     }
 
-    protected new void Death() {
+    protected override void Death() {
+        Fade fadeCanvas = GameObject.FindObjectOfType<Fade>();
+        fadeCanvas.FadeOut();
+        StartCoroutine(SwitchScenes());
+    }
+
+    IEnumerator SwitchScenes() {
+        yield return new WaitForSeconds(2);
         SceneManager.LoadScene("GameOver");
     }
 }
