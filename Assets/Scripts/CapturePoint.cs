@@ -22,6 +22,7 @@ public class CapturePoint : MonoBehaviour
         else
         {
             territory.SetTerritoryColor(Teams.teams[owner.tag]);
+            owner.upgrades.Add(upgrade);
         }
     }
 
