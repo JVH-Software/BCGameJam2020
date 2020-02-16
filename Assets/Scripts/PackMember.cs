@@ -10,7 +10,7 @@ public class PackMember : MonoBehaviour
     public float maxHealth = 10f;
     public float speed = 1f;
     public SimpleHealthBar healthBar;
-    public Pack pack;
+    internal Pack pack;
     public float agroRange = 5;
 
     private Vector2 target;
@@ -23,7 +23,6 @@ public class PackMember : MonoBehaviour
     Rigidbody2D rbody;
     Animator anim;
     protected Vector2 movementVector = Vector2.zero;
-    GameObject packs;
     public Vector2 _staticTarget;
 
     protected List<Vector2> points = new List<Vector2>() { new Vector2(-3f, 5f) };
@@ -35,7 +34,7 @@ public class PackMember : MonoBehaviour
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         gun = GetComponent<Gun>();
-        packs = GameObject.Find("Packs");
+        pack = transform.parent.GetComponent<Pack>();
     }
 
     public void FixedUpdate()

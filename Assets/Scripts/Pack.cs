@@ -13,7 +13,7 @@ public class Pack : MonoBehaviour
     public float defenceMultiplier = 1f;
     public float knockbackMultiplier = 1f;
     public Transform respawnPoint;
-    public List<PackMember> packMembers;
+    private List<PackMember> packMembers = new List<PackMember>();
     public PackMember packLeader;
     public float attackRange = 5;
     public GameObject attackTarget;
@@ -27,6 +27,10 @@ public class Pack : MonoBehaviour
 
     public void Start() {
         upgrades = new UpgradeList(this);
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            packMembers.Add(transform.GetChild(i).GetComponent<PackMember>());
+        }
         if (packLeader == null) packLeader = packMembers[0];
         // get initial positions
         PackMove();

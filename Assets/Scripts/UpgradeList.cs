@@ -39,8 +39,6 @@ public class UpgradeList : List<Upgrades>
     {
         base.Remove(upgrade);
 
-        Debug.Log("Twice?");
-
         switch (upgrade)
         {
             case Upgrades.SpeedBoost:
@@ -50,7 +48,7 @@ public class UpgradeList : List<Upgrades>
                 pack.projectileSpeedMultiplier /= 2;
                 break;
             case Upgrades.DamageBoost:
-                pack.damageMultiplier *= 1/2;
+                pack.damageMultiplier /= 2;
                 break;
             case Upgrades.DefenceBoost:
                 pack.defenceMultiplier *= 2;
