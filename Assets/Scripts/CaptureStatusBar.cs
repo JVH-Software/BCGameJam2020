@@ -52,9 +52,9 @@ public class CaptureStatusBar : MonoBehaviour
         if (capPoint.IsBeingCaptured() || capPoint.isContested())
         {
             SwitchImages();
-            if (capPoint.IsOwned() && capPoint.owner.tag != previousOwner)
+            if (capPoint.IsOwned() && capPoint.owner != previousOwner)
             {
-                previousOwner = capPoint.owner.tag;
+                previousOwner = capPoint.owner;
             }
 
             if (!isBlinking)

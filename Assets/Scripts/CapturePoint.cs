@@ -69,9 +69,10 @@ public class CapturePoint : MonoBehaviour
         if(tags.Count == 1)
         {
             string attacker = tags[0];
-            if(owner != null && attacker != owner)
-
             capturerName = attacker;
+
+            if (owner != null && attacker != owner)
+
             {
                 ownership -= captureRate;
                 if(ownership < 0)
