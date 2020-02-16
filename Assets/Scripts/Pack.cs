@@ -22,7 +22,7 @@ public class Pack : MonoBehaviour
     public float health = 50f;
     public float maxHealth = 50f;
 
-    protected UpgradeList upgrades;
+    internal UpgradeList upgrades;
     public GameObject attackTarget;
     public UnityEngine.Tilemaps.Tilemap tilemap;
     public SimpleHealthBar healthBar;
@@ -169,6 +169,19 @@ public class Pack : MonoBehaviour
             // if we still need to kill, do so
             if (actualDead < numDead) foreach (var doomedGuys in packMembers.Where(x => !x.dead).Take(numDead - actualDead).AsEnumerable()) 
                 doomedGuys.MemberDeath();
+        }
+
+        // assign a new leader if need be
+        if(packLeader.dead && numDead < packMembers.Count) {
+            var counter = 0;
+            while (counter < packMembers.Count) {
+                if (packMembers[counter].dead != true) {
+                    packLeader = packMembers[counter];
+                    gameObject.tag.Equals("Player");
+                    break;
+                }
+                counter++;
+            }
         }
         
         if (healthBar != null) {
