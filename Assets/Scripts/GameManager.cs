@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
 
     CapturePoint[] capturePoints;
     public float winningPercent = 0.5f;
+    public GameObject packsContainer;
     internal Pack[] packs;
+    public Tilemap ground;
 
     private void Start()
     {
@@ -20,11 +23,10 @@ public class GameManager : MonoBehaviour
         }
 
         // Find packs
-        GameObject packsContainter = GameObject.Find("Packs");
-        packs = new Pack[packsContainter.transform.childCount];
-        for (int i = 0; i < packsContainter.transform.childCount; i++)
+        packs = new Pack[packsContainer.transform.childCount];
+        for (int i = 0; i < packsContainer.transform.childCount; i++)
         {
-            packs[i] = packsContainter.transform.GetChild(i).GetComponent<Pack>();
+            packs[i] = packsContainer.transform.GetChild(i).GetComponent<Pack>();
         }
 
     }

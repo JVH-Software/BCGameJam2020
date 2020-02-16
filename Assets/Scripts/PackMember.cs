@@ -126,7 +126,7 @@ public class PackMember : MonoBehaviour
         Pathfinding.FindPath(
                 new Vector2Int(Mathf.RoundToInt(transform.position.x - 0.5f), Mathf.RoundToInt(transform.position.y - 0.5f)), // startpos
                 new Vector2Int(Mathf.RoundToInt(x), Mathf.RoundToInt(y)), // target
-                pack.tilemap,
+                pack.gameManager.ground,
                 out path);
 
         // stop endless stream of error messages

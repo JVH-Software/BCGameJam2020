@@ -16,7 +16,7 @@ public class Pack : MonoBehaviour
     public float knockbackMultiplier = 1f;
     public Transform respawnPoint;
     private List<PackMember> packMembers = new List<PackMember>();
-    public PackMember packLeader;
+    internal PackMember packLeader;
     public float attackRange = 5;
 
     public float health = 50f;
@@ -24,10 +24,9 @@ public class Pack : MonoBehaviour
 
     internal UpgradeList upgrades;
     private Pack attackTarget;
-    public UnityEngine.Tilemaps.Tilemap tilemap;
     public SimpleHealthBar healthBar;
 
-    private GameManager gameManager;
+    internal GameManager gameManager;
 
 
     public float formationSpread = 1.5f;
@@ -44,7 +43,10 @@ public class Pack : MonoBehaviour
         {
             packMembers.Add(transform.GetChild(i).GetComponent<PackMember>());
         }
+
+        // Assign pack leader
         if (packLeader == null) packLeader = packMembers[0];
+
         // get initial positions
         PackMove();
 
@@ -132,7 +134,7 @@ public class Pack : MonoBehaviour
                 ((2 * Mathf.PI) / packMembers.Count) * counter,
                 packLeader.transform.position.x,
                 packLeader.transform.position.y),
-                tilemap,
+                gameManager.ground,
                 touchedTiles);
 
             // add this to our nono list
@@ -158,7 +160,7 @@ public class Pack : MonoBehaviour
         health = maxHealth;
         var takenTiles = "";
         foreach (PackMember packMember in packMembers) {
-            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, tilemap, takenTiles);
+            var pos = Utility.GetClosestWalkableTile(respawnPoint.position, gameManager.ground, takenTiles);
             takenTiles += pos.x + "," + pos.y + "|";
             packMember.transform.position = pos;
             packMember.dead = false;
