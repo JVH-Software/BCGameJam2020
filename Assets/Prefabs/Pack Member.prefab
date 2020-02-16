@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1966986717224339092}
   m_Layer: 10
   m_Name: Pack Member
-  m_TagString: Pack
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,9 +101,10 @@ MonoBehaviour:
   health: 10
   maxHealth: 10
   speed: 8
+  healthBar: {fileID: 0}
   pack: {fileID: 0}
-  attackTarget: {fileID: 0}
-  tilemap: {fileID: 0}
+  agroRange: 5
+  dead: 0
   _staticTarget: {x: 0, y: 0}
 --- !u!114 &8427246947917584339
 MonoBehaviour:
