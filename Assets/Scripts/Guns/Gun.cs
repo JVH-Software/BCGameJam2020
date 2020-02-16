@@ -37,7 +37,7 @@ public class Gun : MonoBehaviour
         {
             Vector3 direction = computeMovementVector(target, shooter);
             // Reset rate of fire delay
-            fireDelay = rateOfFire;
+            fireDelay = (int)(rateOfFire/shooter.pack.fireRateMultiplier);
 
             Quaternion rotation = computeBulletRotation(direction);
 
