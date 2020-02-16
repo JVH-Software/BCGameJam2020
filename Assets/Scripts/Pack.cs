@@ -14,6 +14,8 @@ public class Pack : MonoBehaviour
     public float damageMultiplier = 1f;
     public float defenceMultiplier = 1f;
     public float knockbackMultiplier = 1f;
+    public float fireRateMultiplier = 1f;
+
     public Transform respawnPoint;
     private List<PackMember> packMembers = new List<PackMember>();
     internal PackMember packLeader;
@@ -112,7 +114,6 @@ public class Pack : MonoBehaviour
 
     private string _lastLeaderPos = null;
 
-
     private void CircleFormation(bool force=false) {
         
         var counter = 1;
@@ -173,6 +174,10 @@ public class Pack : MonoBehaviour
     }
 
     public void ModifyHealth(float amount, PackMember lastHit = null) {
+        if(amount < 0 && upgrades.Contains(Upgrades.DefenceBoost))
+        {
+            amount /= 2;
+        }
         health += amount;
 
         var deathUnit = maxHealth / packMembers.Count;

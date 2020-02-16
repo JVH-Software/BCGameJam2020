@@ -12,7 +12,20 @@ public class CapturePoint : MonoBehaviour
     public Upgrades upgrade;
 
     private List<Collider2D> packs = new List<Collider2D>();
-    
+
+    private void Start()
+    {
+        if (owner == null)
+        {
+            territory.SetTerritoryColor(Color.white);
+        }
+        else
+        {
+            territory.SetTerritoryColor(Teams.teams[owner.tag]);
+            owner.upgrades.Add(upgrade);
+        }
+    }
+
     void Update()
     {
         List<string> tags = new List<string>();
