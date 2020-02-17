@@ -40,6 +40,7 @@ public class CaptureStatusBar : MonoBehaviour
     {
         SwitchImages(capPoint.owner);
         statusImg.overrideSprite = foreground;
+        previousOwnership = capPoint.ownership;
     }
 
     // Update is called once per frame
@@ -49,7 +50,7 @@ public class CaptureStatusBar : MonoBehaviour
 
         if (capPoint.IsBeingCaptured() || capPoint.isContested())
         {
-            if (previousOwnership < capPoint.ownership)
+            if (capPoint.ownership > previousOwnership)
             {
                 SwitchImages(capPoint.capturerName);
             }
@@ -78,17 +79,17 @@ public class CaptureStatusBar : MonoBehaviour
     {
         switch (name)
         {
+            case "":
+                background = backgroundArray[0];
+                foreground = foregroundArray[0];
+                break;
             case "Player":
                 background = backgroundArray[1];
                 foreground = foregroundArray[1];
                 break;
-            case "AlphaPack":
+            default:
                 background = backgroundArray[2];
                 foreground = foregroundArray[2];
-                break;
-            default:
-                background = backgroundArray[0];
-                foreground = foregroundArray[0];
                 break;
         }
     }
