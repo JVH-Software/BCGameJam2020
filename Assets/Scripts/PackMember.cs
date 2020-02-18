@@ -49,9 +49,8 @@ public class PackMember : MonoBehaviour
         if (dead)
             return;
 
-
-
-        Move(_staticTarget);
+        if(!(pack.packLeader == this && tag == "Player"))
+            Move(_staticTarget);
         Vector3 direction;
         if (gameObject.tag == "Player")
             direction = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
