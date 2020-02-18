@@ -81939,7 +81939,7 @@ PrefabInstance:
     - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
         type: 3}
       propertyPath: winningPercent
-      value: 0.7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 512205358086454202, guid: ec2171f19e3865544a93d23735748d0c,
         type: 3}

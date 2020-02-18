@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
 
     CapturePoint[] capturePoints;
-    public float winningPercent = 0.5f;
+    public float winningPercent = 1.0f;
     public GameObject packsContainer;
     internal Pack[] packs = new Pack[0];
     public Tilemap ground;
@@ -56,8 +57,16 @@ public class GameManager : MonoBehaviour
         }
         if(((float)controlled)/capturePoints.Length >= winningPercent)
         {
-            Debug.Log("Player Wins!");
+            Fade fadeCanvas = GameObject.FindObjectOfType<Fade>();
+            fadeCanvas.FadeOut();
+            StartCoroutine(SwitchScenes());
         }
+    }
+
+    IEnumerator SwitchScenes()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("NextLevel");
     }
 
     void GenerateLevel(int level)
