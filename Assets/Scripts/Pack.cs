@@ -181,7 +181,7 @@ public class Pack : MonoBehaviour
     public void Respawn()
     {
 
-        Transform respawnPoint = gameManager.FindRandomOwnedPoint(tag).transform;
+        CapturePoint respawnPoint = gameManager.FindRandomOwnedPoint(tag);
         if (respawnPoint != null)
         {
             respawnCount = 0;
@@ -190,7 +190,7 @@ public class Pack : MonoBehaviour
             var takenTiles = "";
             foreach (PackMember packMember in packMembers)
             {
-                var pos = Utility.GetClosestWalkableTile(respawnPoint.position, gameManager.ground, takenTiles);
+                var pos = Utility.GetClosestWalkableTile(respawnPoint.transform.position, gameManager.ground, takenTiles);
                 takenTiles += pos.x + "," + pos.y + "|";
                 packMember.transform.position = pos;
                 packMember.MemberRessurect();
