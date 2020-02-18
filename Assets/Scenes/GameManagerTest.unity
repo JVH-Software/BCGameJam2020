@@ -306,7 +306,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &71029837
 MonoBehaviour:
@@ -320,7 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e6198bc197b3c489a2af15e11c4d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
 --- !u!50 &71029838
 Rigidbody2D:
   serializedVersion: 4
@@ -370,7 +369,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &245287438
 GameObject:
@@ -453,7 +452,7 @@ Transform:
   m_LocalScale: {x: 20.266636, y: 303.62, z: 303.62}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &560574446
 GameObject:
@@ -628,7 +627,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &698650986
 GameObject:
@@ -757,7 +756,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &698650993
 MonoBehaviour:
@@ -771,7 +770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4253dbf37206714b913186a6a6bca99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1.5
 --- !u!1 &705759531
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,7 +896,7 @@ Transform:
   - {fileID: 705759532}
   - {fileID: 42996429}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1214809768
 MonoBehaviour:
@@ -912,10 +910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7792b16435fd8b94db1758fded8790b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  region: {fileID: 0}
-  capturePercentage: 0
-  numTeamsOnNode: 0
-  occupyingTeam: 
+  regionRadius: 10
 --- !u!58 &1214809769
 CircleCollider2D:
   m_ObjectHideFlags: 0

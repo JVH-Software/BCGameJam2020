@@ -32,8 +32,7 @@ public class MachineGun : Gun
             } else {
                 burstStatus --;
                 if (burstStatus <= 0) burstStatus = 0;
-                fireDelay = rateOfBurst;
-                
+                fireDelay = rateOfBurst;           
             }          
 
             // Compute bullet rotation
