@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CityLevel.unity
     guid: 493d51a20d416db4aaae6012117bcbb9
   - enabled: 1
-    path: Assets/Scenes/NextLevel.unity
+    path: Assets/Scenes/GameOver.unity
     guid: 0ef2481faefbbb64c896101cfca1c5ba
   - enabled: 1
-    path: Assets/Scenes/GameOver.unity
+    path: Assets/Scenes/NextLevel.unity
     guid: 8a5c68b5640f51d4d93889e493ae504c
   m_configObjects: {}
