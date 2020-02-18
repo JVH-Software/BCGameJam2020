@@ -65,7 +65,6 @@ public class GameManager : MonoBehaviour
         numEnemyTeams = allLevelParameters[level].numEnemyTeams;
         numStartingPackMembers = allLevelParameters[level].numStartingPackMembers;
         numPacksPerTeam = allLevelParameters[level].numPacksPerTeam;
-        numStartingPackMembers = 4;
 
         if(numEnemyTeams + 1 > Teams.teams.Count)
         {
