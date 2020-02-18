@@ -215,7 +215,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f4e29fdb04b932645b17d9c45a904c0c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 86bb01deea02d7b46bff98409b762d18, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -810,6 +810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneOne: CityLevel
+  startingLevel: 0
 --- !u!224 &350863980
 RectTransform:
   m_ObjectHideFlags: 0
