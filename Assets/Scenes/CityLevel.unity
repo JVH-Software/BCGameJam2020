@@ -4172,6 +4172,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6331386844047641196, guid: 1fba104ec20b5b4458bb2602cda59c71,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 50b65d39bfefffe41a0a428096bc6803,
+        type: 3}
     - target: {fileID: 7990991794731506152, guid: 1fba104ec20b5b4458bb2602cda59c71,
         type: 3}
       propertyPath: m_Name
@@ -4281,6 +4287,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990991795678420606, guid: 1fba104ec20b5b4458bb2602cda59c71,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.9088
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990991795678420606, guid: 1fba104ec20b5b4458bb2602cda59c71,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.9088
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990991795678420606, guid: 1fba104ec20b5b4458bb2602cda59c71,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.9088
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990991795678420606, guid: 1fba104ec20b5b4458bb2602cda59c71,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 122
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990991795678420606, guid: 1fba104ec20b5b4458bb2602cda59c71,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -149
       objectReference: {fileID: 0}
     - target: {fileID: 7990991796603383764, guid: 1fba104ec20b5b4458bb2602cda59c71,
         type: 3}
@@ -4855,6 +4886,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1719218820}
     m_Modifications:
+    - target: {fileID: 7455341672086790867, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8721359286136160515, guid: 39913cddc7699ce419edbfdbbe4ef2b8,
         type: 3}
       propertyPath: m_LocalScale.x

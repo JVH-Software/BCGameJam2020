@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seed: 0
-  level: 0
+  level: 6
 --- !u!1 &931950954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1924,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 7991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2099,6 +2099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneOne: CityLevel
+  startingLevel: 0
 --- !u!1 &2145082088
 GameObject:
   m_ObjectHideFlags: 0

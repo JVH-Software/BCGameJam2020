@@ -49,12 +49,12 @@ MonoBehaviour:
   defenceMultiplier: 1
   knockbackMultiplier: 1
   fireRateMultiplier: 1
-  respawnPoint: {fileID: 0}
-  attackRange: 5
+  attackRange: 7
   health: 50
   maxHealth: 50
   overlay: {fileID: 0}
   packMemberPrefab: {fileID: 561824486460084831, guid: 0154f82a19e55134c9866883e9a45872,
     type: 3}
+  respawnDelay: 200
   formationSpread: 1.5
   formation: 0

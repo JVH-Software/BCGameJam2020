@@ -55,6 +55,35 @@ public class CapturePoint : MonoBehaviour
 
     void Update()
     {
+
+        switch (upgrade)
+        {
+            case Upgrades.SpeedBoost:
+                transform.GetChild(2).gameObject.SetActive(true);
+                break;
+            case Upgrades.FasterShot:
+                transform.GetChild(3).gameObject.SetActive(true);
+                break;
+            case Upgrades.DamageBoost:
+                transform.GetChild(4).gameObject.SetActive(true);
+                break;
+            case Upgrades.DefenceBoost:
+                transform.GetChild(5).gameObject.SetActive(true);
+                break;
+            case Upgrades.PerfectAim:
+                transform.GetChild(6).gameObject.SetActive(true);
+                break;
+            case Upgrades.NoRecoil:
+                transform.GetChild(7).gameObject.SetActive(true);
+                break;
+            case Upgrades.ExtraKnockback:
+                transform.GetChild(8).gameObject.SetActive(true);
+                break;
+            case Upgrades.MachineGun:
+                transform.GetChild(9).gameObject.SetActive(true);
+                break;
+        }
+
         List<string> tags = new List<string>();
         foreach (Collider2D pack in packs)
         {
