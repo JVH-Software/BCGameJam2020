@@ -100,7 +100,7 @@ public class CapturePoint : MonoBehaviour
     }
 
     public bool isContested() { return packs.Count >= 2;  }
-    public bool IsBeingCaptured() { return capturerName != "";  }
+    public bool IsBeingCaptured() { return ownership < 1 && capturerName != "";  }
     public bool IsOwned() { return owner != "";  }
 
     private void OnTriggerEnter2D(Collider2D other)

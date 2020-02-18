@@ -33,15 +33,14 @@ public class CaptureStatusBar : MonoBehaviour
     private const float BLINK_DURATION = 0.5f;
     private bool isBlinking = false;
 
-    private string previousCapturer;
-    private string previousOwner;
+    private float previousOwnership;
 
     // Start is called before the first frame update
     void Start()
     {
-        background = backgroundArray[0];
-        foreground = foregroundArray[0];
-        statusImg.overrideSprite = background;
+        SwitchImages(capPoint.owner);
+        statusImg.overrideSprite = foreground;
+        previousOwnership = capPoint.ownership;
     }
 
     // Update is called once per frame
@@ -51,19 +50,19 @@ public class CaptureStatusBar : MonoBehaviour
 
         if (capPoint.IsBeingCaptured() || capPoint.isContested())
         {
-            SwitchImages();
-            if (capPoint.IsOwned() && capPoint.owner != previousOwner)
+            if (capPoint.ownership > previousOwnership)
             {
-                previousOwner = capPoint.owner;
+                SwitchImages(capPoint.capturerName);
             }
 
-            if (!isBlinking)
+            previousOwnership = capPoint.ownership;
+
+            if (capPoint.ownership < 1 && !isBlinking)
             {
                 isBlinking = true;
                 StartCoroutine(Blink());
             }
 
-            previousCapturer = capPoint.capturerName;
         }
 
     }
@@ -76,23 +75,21 @@ public class CaptureStatusBar : MonoBehaviour
         mask.fillAmount = fillAmount;
     }
     
-    void SwitchImages()
+    void SwitchImages(string name)
     {
-        if (capPoint.capturerName == previousCapturer) { return; }
-
-        switch (capPoint.capturerName)
+        switch (name)
         {
+            case "":
+                background = backgroundArray[0];
+                foreground = foregroundArray[0];
+                break;
             case "Player":
                 background = backgroundArray[1];
                 foreground = foregroundArray[1];
                 break;
-            case "AlphaPack":
+            default:
                 background = backgroundArray[2];
                 foreground = foregroundArray[2];
-                break;
-            default:
-                background = backgroundArray[0];
-                foreground = foregroundArray[0];
                 break;
         }
     }
@@ -110,6 +107,9 @@ public class CaptureStatusBar : MonoBehaviour
             }
             yield return new WaitForSeconds(BLINK_DURATION);
         }
+
+        if (capPoint.ownership >= 1) { statusImg.overrideSprite = foreground; }
+
         isBlinking = false;
     }
 }
