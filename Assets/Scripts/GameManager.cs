@@ -80,6 +80,12 @@ public class GameManager : MonoBehaviour
             throw new UnityException();
         }
 
+        // Adjust random generator a bit per level
+        for(int i = 0; i < level*5; i++)
+        {
+            UnityEngine.Random.Range(0, 1);
+        }
+
 
         // Generate Teams
         Dictionary<string, Color>.KeyCollection.Enumerator enumerator = Teams.teams.Keys.GetEnumerator();
