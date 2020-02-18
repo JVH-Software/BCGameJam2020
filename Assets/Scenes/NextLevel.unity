@@ -336,8 +336,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 267, y: 278}
-  m_SizeDelta: {x: 1010.4, y: 173.8}
+  m_AnchoredPosition: {x: 60, y: 278}
+  m_SizeDelta: {x: 498.9, y: 173.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &109990463
 MonoBehaviour:
@@ -357,9 +357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your wolf gang won!
-
-    Play the next level?'
+  m_text: You prevail!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 790e44b4d9a70b448b69ecc010924ef5, type: 2}
   m_sharedMaterial: {fileID: 6176351618900697596, guid: 790e44b4d9a70b448b69ecc010924ef5,
@@ -429,12 +427,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 3.5950317, z: 0.000061035156, w: 0}
   m_textInfo:
     textComponent: {fileID: 109990463}
-    characterCount: 40
+    characterCount: 12
     spriteCount: 0
-    spaceCount: 7
-    wordCount: 8
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 2
   m_isUsingLegacyAnimationComponent: 0
@@ -971,17 +969,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897629513}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.15720633, w: -0.9875658}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 381781603}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -18.09}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 244, y: -69.35}
-  m_SizeDelta: {x: -664, y: 138.7}
+  m_AnchoredPosition: {x: -234, y: 31.1}
+  m_SizeDelta: {x: -414.3, y: -187.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &897629515
 MonoBehaviour:
@@ -1001,7 +999,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 855a019ad7745e5429a0e40f0202bac9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd7a485c05e49fb439a9e42ec3013280, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1055,7 +1053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -68}
+  m_AnchoredPosition: {x: 27, y: 1}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1199601949
@@ -1496,7 +1494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 32}
+  m_AnchoredPosition: {x: 27, y: 101}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1734649228
@@ -1623,7 +1621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 32, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1800738634
