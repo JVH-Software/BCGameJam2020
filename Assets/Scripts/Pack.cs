@@ -63,6 +63,7 @@ public class Pack : MonoBehaviour
     {
         GameObject member = Instantiate(packMemberPrefab, transform);
         member.tag = tag;
+        member.GetComponent<PackMember>().UpdateColor();
         packMembers.Add(member.GetComponent<PackMember>());
         if (packLeader == null) packLeader = packMembers[0];
     }

@@ -66,6 +66,14 @@ public class PackMember : MonoBehaviour
  
     }
 
+    public void UpdateColor()
+    {
+        SpriteRenderer renderer = GetComponent<SpriteRenderer>();
+        Color color = Teams.teams[tag];
+
+        renderer.color = color;
+    }
+
 
     private void PerformMovement()
     {
@@ -75,7 +83,8 @@ public class PackMember : MonoBehaviour
     
         if (movementVector != Vector2.zero)
         {
-            anim.SetBool("IsWalking", true);
+            //Disable run animation until changed to whiter sprites
+            //anim.SetBool("IsWalking", true);
         }
         else
         {
